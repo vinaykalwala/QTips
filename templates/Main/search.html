@@ -1,0 +1,1831 @@
+{% load static %}
+{% load product_tags %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>VStore</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{% static 'path/to/jquery-3.6.4.min.js' %}"></script>
+<script src="{% static 'path/to/jquery-ui.min.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+    <link rel="stylesheet" href="{% static 'assets/css/preloader.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/meanmenu.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl-carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/swiper-bundle.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/backtotop.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/ui-range-slider.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/flaticon/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome-pro.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/default.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <style>
+        /* Import Google Font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+.wrapper {
+  width: 400px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px 25px 40px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+}
+header h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+header p {
+  margin-top: 5px;
+  font-size: 16px;
+}
+.price-input {
+  width: 100%;
+  display: flex;
+  margin: 30px 0 35px;
+}
+.price-input .field {
+  display: flex;
+  width: 100%;
+  height: 45px;
+  align-items: center;
+}
+.field input {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  font-size: 19px;
+  margin-left: 12px;
+  border-radius: 5px;
+  text-align: center;
+  border: 1px solid #999;
+  -moz-appearance: textfield;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.price-input .separator {
+  width: 130px;
+  display: flex;
+  font-size: 19px;
+  align-items: center;
+  justify-content: center;
+}
+.slider {
+  height: 5px;
+  position: relative;
+  background: #ddd;
+  border-radius: 5px;
+}
+.slider .progress {
+  height: 100%;
+  left: 25%;
+  right: 25%;
+  position: absolute;
+  border-radius: 5px;
+  background: #17a2b8;
+}
+.range-input {
+  position: relative;
+}
+.range-input input {
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  top: -5px;
+  background: none;
+  pointer-events: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  height: 17px;
+  width: 17px;
+  border-radius: 50%;
+  background: #17a2b8;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+}
+input[type="range"]::-moz-range-thumb {
+  height: 17px;
+  width: 17px;
+  border: none;
+  border-radius: 50%;
+  background: #17a2b8;
+  pointer-events: auto;
+  -moz-appearance: none;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Support */
+.support-box {
+  top: 2rem;
+  position: relative;
+  bottom: 0;
+  text-align: center;
+  display: block;
+}
+.b-btn {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+.b-btn.paypal i {
+  color: blue;
+}
+.b-btn:hover {
+  text-decoration: none;
+  font-weight: bold;
+}
+.b-btn i {
+  font-size: 20px;
+  color: yellow;
+  margin-top: 2rem;
+}
+
+    </style>
+</head>
+
+<body>
+
+
+    <!-- back to top start -->
+    <div class="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+    <!-- back to top end -->
+
+    <!-- header-start -->
+    <header class="header d-blue-bg">
+        <div class="header-top">
+            <div class="container 0">
+                <div class="header-inner">
+                    <div class="row align-items-center">
+                        <div class="col-xl-6 col-lg-7">
+                            <div class="header-inner-start">
+
+                                <div class="support d-none d-sm-block">
+                                    <p>Need Help? <a href="tel:+91 9912643756">+91 9912643756</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-5 d-none d-lg-block">
+                            <div class="header-inner-end text-md-end">
+                                <div class="ovic-menu-wrapper ovic-menu-wrapper-2">
+                                    <ul>
+                                        <li><a href="/about/">About Us</a></li>
+                                        <li><a href="contact.html">Order Tracking</a></li>
+                                        <li><a href="/contact/">Contact Us</a></li>
+                                        <li><a href="faq.html">FAQs</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-mid">
+            <div class="container">
+                <div class="heade-mid-inner">
+                    <div class="row align-items-center">
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4">
+                            <div class="header__info header__info-2">
+                                <div class="logo logo-3">
+                                    <a href="/" class="logo-image">
+                                        <h1 style="color: white;">VStore.in</h1>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-xl-5 col-lg-4 d-none d-lg-block">
+                            <div class="header__search">
+                                <form role="search" method="get" action="/search/">
+                                    <div class="header__search-box">
+                                        <input class="search-input" type="text" placeholder="I'm shopping for..." style="padding: 20px;" name="query_pass" id="query_pass">
+                                        <button class="button" type="submit"><i class="far fa-search"></i></button>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-5 col-md-8 col-sm-8">
+                            <div class="header-action" style="display:flex;justify-content:space-around">
+
+                                <div class="block-cart action side-menu-btn offcanvas-toggle-btn">
+                                    <a class="icon-link icon-link-2">
+                                        <i class="flaticon-shopping-bag "></i>
+                                        <span class="count count-2">{{request.session.cart|length}}</span>
+
+                                    </a>
+                                    <div class="cart">
+                                        <div class="cart__mini">
+                                            <ul>
+                                                <li>
+                                                    <div class="cart__title">
+                                                        <h4>Your Cart</h4>
+                                                        <span>(1 Item in Cart)</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div
+                                                        class="cart__item d-flex justify-content-between align-items-center">
+                                                        <div class="cart__inner d-flex">
+                                                            <div class="cart__thumb">
+                                                                <a href="product-details.html">
+                                                                    <!-- <img src="assets/img/cart/20.jpg" alt=""> -->
+                                                                </a>
+                                                            </div>
+                                                            <div class="cart__details">
+                                                                <h6><a href="product-details.html"> Samsung C49J89:
+                                                                        £875, Debenhams Plus </a></h6>
+                                                                <div class="cart__price">
+                                                                    <span>$255.00</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="cart__del">
+                                                            <a href="#"><i class="fal fa-times"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div
+                                                        class="cart__sub d-flex justify-content-between align-items-center">
+                                                        <h6>Subtotal</h6>
+                                                        <span class="cart__sub-total">$255.00</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <a href="/cart/cart-detail/" class="wc-cart mb-10">View cart</a>
+                                                    <a href="checkout.html" class="wc-checkout">Checkout</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if user.is_authenticated %}
+
+                                <div class="block-userlink">
+                                    <a class="icon-link" href="{% url 'my_account' %}">
+                                        <i class="flaticon-user"></i>
+                                        <span class="text">
+                                            <span class="sub">{{user.username}} </span>
+                                            My Account </span>
+                                    </a>
+                                </div>
+
+                                {% else %}
+                                <div class="block-userlink">
+                                    <a class="icon-link" href="{% url 'my_account' %}">
+                                        <i class="flaticon-user"></i>
+                                        <span class="text">
+                                            <span class="sub">Login </span>
+                                            My Account </span>
+                                    </a>
+                                </div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header__bottom d-none d-lg-block">
+            <div class="container">
+                <div class="box-items-inner pt-10 pb-10">
+                    <div class="box-item">
+                        <a href="/products/?categories=4">
+                            <i class="fal fa-desktop"></i>
+                            Laptop <br> & Computer
+                        </a>
+                    </div>
+                    <div class="box-item">
+                        <a href="/products/?categories=1">
+                            <i class="fal fa-mobile"></i>
+                            Tablets <br> & Mobile Phones
+                        </a>
+                    </div>
+                    <div class="box-item">
+                        <a href="shop.html">
+                            <i class="fal fa-router"></i>
+                            Digitals <br> & Electronics
+                        </a>
+                    </div>
+                    <div class="box-item">
+                        <a href="shop.html">
+                            <i class="fal fa-webcam"></i>
+                            Camera <br> & Accesories
+                        </a>
+                    </div>
+                    <div class="box-item">
+                        <a href="shop.html">
+                            <i class="fal fa-bed-alt"></i>
+                            Decor <br> & Furniture
+                        </a>
+                    </div>
+                    <div class="box-item">
+                        <a href="shop.html">
+                            <i class="fal fa-tshirt"></i>
+                            Fashion <br> & Clotheing
+                        </a>
+                    </div>
+                    <div class="box-item d-lg-none">
+                        <a href="shop.html">
+                            <i class="fal fa-hat-chef"></i>
+                            Garden <br> & Home Kitchen
+                        </a>
+                    </div>
+                    <div class="box-item d-lg-none d-xl-block">
+                        <a href="shop.html">
+                            <i class="fal fa-speaker"></i>
+                            Audio <br> & Headphones
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+    <!-- offcanvas area start -->
+    <div class="offcanvas__area">
+        <div class="offcanvas__wrapper">
+            <div class="offcanvas__close">
+                <button class="offcanvas__close-btn" id="offcanvas__close-btn">
+                    <i class="fal fa-times"></i>
+                </button>
+            </div>
+            <div class="offcanvas__content">
+                <div class="offcanvas__logo mb-40">
+                    <a href="/">
+                        <h1>VCart</h1>
+                    </a>
+                </div>
+                <div class="offcanvas__search mb-25">
+                    {% if request.session.cart|length < 1 %} <h4 style="text-align: center;">Your Cart is empty</h4>
+                        {% else %}
+                        {% for key,value in request.session.cart.items %}
+                        <div class="cart__item d-flex justify-content-between align-items-center">
+                            <div class="cart__inner d-flex">
+                                <div class="cart__thumb">
+                                    <a href="product-details.html">
+                                        <img src="{{value.image}}" alt="">
+                                    </a>
+                                </div>
+                                <div class="cart__details">
+                                    <h6><a href="{{value.get_absolute_url}}"> {{value.name}}</a></h6>
+                                    <div class="cart__price">
+                                        <span>&#8377;{{value.price|floatformat:0}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart__del">
+                                <a href="{% url 'item_clear' key  %}"><i class="fal fa-times"></i></a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div>
+                            <li>
+                                <a href="/cart/cart-detail/" class="wc-cart mb-10">View cart</a>
+                                <a href="/checkout/" class="wc-checkout">Checkout</a>
+                            </li>
+                        </div>
+                        {% endif %}
+                </div>
+                <div class="mobile-menu fix"></div>
+                <div class="offcanvas__action">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- offcanvas area end -->
+    <div class="body-overlay"></div>
+    <!-- offcanvas area end -->
+
+    <main>
+        <!-- breadcrumb__area-start -->
+        <section class="breadcrumb__area box-plr-75">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="breadcrumb__wrapper">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/">Home</a></li>/
+                                    <li class="active">Shop</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- breadcrumb__area-end -->
+
+        <!-- shop-area-start -->
+        <div class="shop-area mb-20">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-4">
+                        <form id="filterForm" method="post" action="{% url 'products' %}" class="s-form mt-20">
+                            {% csrf_token %}
+                    
+                            <div class="product-widget mb-30">
+                                <h5 class="pt-title">Filter By Price</h5>
+                                <div class="price__slider mt-30">
+                                    <!-- Your price slider code goes here -->
+                                </div>
+                                <div>
+                                    <input type="text" id="min_price" hidden name="min_price" placeholder="Min Price">
+                                    <input type="text" id="max_price" hidden name="max_price" placeholder="Max Price">
+                                </div>
+                                <div class="wrappers">
+                                  
+                                    <div class="price-input">
+                                      <div class="field">
+                                        <span>Min</span>
+                                        <input type="number" style="font-size: small;" class="input-min" value="50000">
+                                      </div>
+                                      <div class="separator">-</div>
+                                      <div class="field">
+                                        <span>Max</span>
+                                        <input type="number" style="font-size: small;" class="input-max" value="75000">
+                                      </div>
+                                    </div>
+                                    <div class="slider">
+                                      <div class="progress"></div>
+                                    </div>
+                                    <div class="range-input">
+                                      <input type="range" class="range-min" min="0" max="100000" value="5000" step="500">
+                                      <input type="range" class="range-max" min="0" max="100000" value="75000" step="500">
+                                    </div>
+      
+                                </div>
+                            </div>
+
+                           
+                                
+                    
+                            <div class="product-widget mb-30">
+                                <h5 class="pt-title">Choose Color</h5>
+                                <div class="product__color mt-20">
+                                    <ul>
+                                        <input type="text" id="sub_category_url" hidden name="sub_category_url" value="" >
+                                        <input type="text" id="sub_category_" hidden name="sub_category_" value="{{subcategory_}}" >
+                                        {% for i in unique_colors %}
+                                    <div class="single-widget-category">
+                                        <input type="checkbox" id="color_{{i.id}}" value="{{i.id}}" name="color" >
+                                        <label for="color_{{i.id}}">{{i.code}} <span>(12)</span></label>
+                                    </div>
+                                    {% endfor %}
+                                        <!-- Add similar lines for other colors -->
+                                    </ul>
+                                </div>
+                            </div>
+                    
+                            <div class="product-widget mb-30">
+                                <h5 class="pt-title">Choose Size</h5>
+                                <div class="widget-category-list mt-20">
+                                    {% for i in unique_size %}
+                                    <div class="single-widget-category">
+                                        <input type="checkbox" id="size_{{i.id}}" name="size" value="{{i.id}}">
+                                        <label for="size_{{i.id}}">{{i.name}} <span>(12)</span></label>
+                                    </div>
+                                    {% endfor %}
+                                    <!-- Add similar lines for other sizes -->
+                                </div>
+                            </div>
+                    
+                            <div class="product-widget mb-30">
+                                <h5 class="pt-title">Choose Brand</h5>
+                                <div class="widget-category-list mt-20">
+                                    
+                                    {% for bra in unique_brands %}
+                                    <div class="single-widget-category">
+                                        <input type="checkbox" id="brand_{{ bra.id }}" name="brands" value="{{ bra.id }}">
+                                        <label for="brand_{{ bra.id }}">{{ bra.Brand_name }} <span>({{ bra.products.count }})</span></label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                    
+                            <button type="submit" id="filterBtn" class="tp-btn-square-lg"  >Filter</button>
+                        </form>
+                    
+                        
+                    </div>
+                    
+                    
+                   
+                    
+                    <div class="col-xl-9 col-lg-8">
+                        <div class="shop-banner mb-30">
+                            <div class="banner-image">
+                                <img class="banner-l" src="{% static 'assets/img/banner/sl-banner.jpg' %}" alt="">
+                                <img class="banner-sm" src="{% static 'assets/img/banner/sl-banner-sm.png' %}" alt="">
+                                <div class="banner-content text-center">
+                                    <p class="banner-text mb-30">Hurry Up! <br> Free Shipping All Order Over $99</p>
+                                    <a href="shop.html" class="st-btn-d b-radius">Discover now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-lists-top">
+                            <div class="product__filter-wrap">
+                                <div class="row align-items-center">
+                                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+                                        <div class="product__filter d-sm-flex align-items-center">
+                                            <div class="product__col">
+                                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link active" id="FourCol-tab"
+                                                            data-bs-toggle="tab" data-bs-target="#FourCol" type="button"
+                                                            role="tab" aria-controls="FourCol" aria-selected="true">
+                                                            <i class="fal fa-th"></i>
+                                                        </button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="FiveCol-tab" data-bs-toggle="tab"
+                                                            data-bs-target="#FiveCol" type="button" role="tab"
+                                                            aria-controls="FiveCol" aria-selected="false">
+                                                            <i class="fal fa-list"></i>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="product__result pl-60">
+                                                <p>Showing 1-20 of 29 relults</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+                                        <div
+                                            class="product__filter-right d-flex align-items-center justify-content-md-end">
+                                            <div class="product__sorting product__show-no">
+                                                <select>
+                                                    <option>10</option>
+                                                    <option>20</option>
+                                                    <option>30</option>
+                                                    <option>40</option>
+                                                </select>
+                                            </div>
+                                            <div class="product__sorting product__show-position ml-20">
+                                                <select>
+                                                    <option>Latest</option>
+                                                    <option>New</option>
+                                                    <option>Up comeing</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content" id="productGridTabContent">
+                            <div class="tab-pane fade  show active" id="FourCol" role="tabpanel"
+                                aria-labelledby="FourCol-tab">
+                                <div class="tp-wrapper">
+                                    <div class="row g-0" id="filteredProducts">
+                                        
+                                        {% include "ajax/product.html" %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="FiveCol" role="tabpanel" aria-labelledby="FiveCol-tab">
+                                <div class="tp-wrapper-2">
+                                    <div class="single-item-pd">
+                                        <div class="row align-items-center">
+                                            <div class="col-xl-9">
+                                                <div
+                                                    class="single-features-item single-features-item-df b-radius mb-20">
+                                                    <div class="row  g-0 align-items-center">
+                                                        <div class="col-md-4">
+                                                            <div class="features-thum">
+                                                                <div class="features-product-image w-img">
+                                                                    <a href="product-details.html"><img
+                                                                            src="{% static 'assets/img/product/sm-1.jpg' %}"
+                                                                            alt=""></a>
+                                                                </div>
+                                                                <div class="product__offer">
+                                                                    <span class="discount">-15%</span>
+                                                                </div>
+                                                                <div class="product-action">
+                                                                    <a href="#" class="icon-box icon-box-1"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#productModalId">
+                                                                        <i class="fal fa-eye"></i>
+                                                                        <i class="fal fa-eye"></i>
+                                                                    </a>
+                                                                    <a href="#" class="icon-box icon-box-1">
+                                                                        <i class="fal fa-heart"></i>
+                                                                        <i class="fal fa-heart"></i>
+                                                                    </a>
+                                                                    <a href="#" class="icon-box icon-box-1">
+                                                                        <i class="fal fa-layer-group"></i>
+                                                                        <i class="fal fa-layer-group"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="product__content product__content-d">
+                                                                <h6><a href="product-details.html">Classic Leather
+                                                                        Backpack Daypack 2022</a></h6>
+                                                                <div class="rating mb-5">
+                                                                    <ul class="rating-d">
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <span>(01 review)</span>
+                                                                </div>
+                                                                <div class="features-des">
+                                                                    <ul>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Bass and
+                                                                                Stereo Sound.</a></li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Display
+                                                                                with 3088 x 1440 pixels resolution.</a>
+                                                                        </li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Memory,
+                                                                                Storage &amp; SIM: 12GB RAM, 256GB.</a>
+                                                                        </li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Androi
+                                                                                v10.0 Operating system.</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3">
+                                                <div class="product-stock mb-15">
+                                                    <h5>Availability: <span> 940 in stock</span></h5>
+                                                    <h6>$220.00 - <del> $240.00</del></h6>
+                                                </div>
+                                                <div class="stock-btn ">
+                                                    <button type="button"
+                                                        class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100">
+                                                        Add to Catrss
+                                                    </button>
+                                                    <button type="button"
+                                                        class="wc-checkout d-flex align-items-center justify-content-center w-100"
+                                                        data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                        Quick View
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-item-pd">
+                                        <div class="row align-items-center">
+                                            <div class="col-xl-9">
+                                                <div
+                                                    class="single-features-item single-features-item-df b-radius mb-20">
+                                                    <div class="row  g-0 align-items-center">
+                                                        <div class="col-md-4">
+                                                            <div class="features-thum">
+                                                                <div class="features-product-image w-img">
+                                                                    <a href="product-details.html"><img
+                                                                            src="{% static 'assets/img/product/sm-2.jpg' %}"
+                                                                            alt=""></a>
+                                                                </div>
+                                                                <div class="product-action">
+                                                                    <a href="#" class="icon-box icon-box-1"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#productModalId">
+                                                                        <i class="fal fa-eye"></i>
+                                                                        <i class="fal fa-eye"></i>
+                                                                    </a>
+                                                                    <a href="#" class="icon-box icon-box-1">
+                                                                        <i class="fal fa-heart"></i>
+                                                                        <i class="fal fa-heart"></i>
+                                                                    </a>
+                                                                    <a href="#" class="icon-box icon-box-1">
+                                                                        <i class="fal fa-layer-group"></i>
+                                                                        <i class="fal fa-layer-group"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="product__content product__content-d">
+                                                                <h6><a href="product-details.html">Samsang Galaxy A70
+                                                                        128GB Dual-SIM</a></h6>
+                                                                <div class="rating mb-5">
+                                                                    <ul class="rating-d">
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <span>(01 review)</span>
+                                                                </div>
+                                                                <div class="features-des">
+                                                                    <ul>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Bass and
+                                                                                Stereo Sound.</a></li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Display
+                                                                                with 3088 x 1440 pixels resolution.</a>
+                                                                        </li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Memory,
+                                                                                Storage &amp; SIM: 12GB RAM, 256GB.</a>
+                                                                        </li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Androi
+                                                                                v10.0 Operating system.</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3">
+                                                <div class="product-stock mb-15">
+                                                    <h5>Availability: <span> 940 in stock</span></h5>
+                                                    <h6>$216.00</h6>
+                                                </div>
+                                                <div class="stock-btn ">
+                                                    <button type="button"
+                                                        class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100">
+                                                        Add to Catrss
+                                                    </button>
+                                                    <button type="button"
+                                                        class="wc-checkout d-flex align-items-center justify-content-center w-100"
+                                                        data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                        Quick View
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-item-pd">
+                                        <div class="row align-items-center">
+                                            <div class="col-xl-9">
+                                                <div
+                                                    class="single-features-item single-features-item-df b-radius mb-20">
+                                                    <div class="row  g-0 align-items-center">
+                                                        <div class="col-md-4">
+                                                            <div class="features-thum">
+                                                                <div class="features-product-image w-img">
+                                                                    <a href="product-details.html"><img
+                                                                            src="{% static 'assets/img/product/sm-3.jpg' %}"
+                                                                            alt=""></a>
+                                                                </div>
+                                                                <div class="product-action">
+                                                                    <a href="#" class="icon-box icon-box-1"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#productModalId">
+                                                                        <i class="fal fa-eye"></i>
+                                                                        <i class="fal fa-eye"></i>
+                                                                    </a>
+                                                                    <a href="#" class="icon-box icon-box-1">
+                                                                        <i class="fal fa-heart"></i>
+                                                                        <i class="fal fa-heart"></i>
+                                                                    </a>
+                                                                    <a href="#" class="icon-box icon-box-1">
+                                                                        <i class="fal fa-layer-group"></i>
+                                                                        <i class="fal fa-layer-group"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="product__content product__content-d">
+                                                                <h6><a href="product-details.html">Coffee Maker AH240a
+                                                                        Full Function</a></h6>
+                                                                <div class="rating mb-5">
+                                                                    <ul class="rating-d">
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <span>(01 review)</span>
+                                                                </div>
+                                                                <div class="features-des">
+                                                                    <ul>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Bass and
+                                                                                Stereo Sound.</a></li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Display
+                                                                                with 3088 x 1440 pixels resolution.</a>
+                                                                        </li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Memory,
+                                                                                Storage &amp; SIM: 12GB RAM, 256GB.</a>
+                                                                        </li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Androi
+                                                                                v10.0 Operating system.</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3">
+                                                <div class="product-stock mb-15">
+                                                    <h5>Availability: <span> 940 in stock</span></h5>
+                                                    <h6>$125.00</h6>
+                                                </div>
+                                                <div class="stock-btn ">
+                                                    <button type="button"
+                                                        class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100">
+                                                        Add to Catrss
+                                                    </button>
+                                                    <button type="button"
+                                                        class="wc-checkout d-flex align-items-center justify-content-center w-100"
+                                                        data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                        Quick View
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-item-pd">
+                                        <div class="row align-items-center">
+                                            <div class="col-xl-9">
+                                                <div
+                                                    class="single-features-item single-features-item-df b-radius mb-20">
+                                                    <div class="row  g-0 align-items-center">
+                                                        <div class="col-md-4">
+                                                            <div class="features-thum">
+                                                                <div class="features-product-image w-img">
+                                                                    <a href="product-details.html"><img
+                                                                            src="{% static 'assets/img/product/sm-4.jpg' %}"
+                                                                            alt=""></a>
+                                                                </div>
+                                                                <div class="product-action">
+                                                                    <a href="#" class="icon-box icon-box-1"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#productModalId">
+                                                                        <i class="fal fa-eye"></i>
+                                                                        <i class="fal fa-eye"></i>
+                                                                    </a>
+                                                                    <a href="#" class="icon-box icon-box-1">
+                                                                        <i class="fal fa-heart"></i>
+                                                                        <i class="fal fa-heart"></i>
+                                                                    </a>
+                                                                    <a href="#" class="icon-box icon-box-1">
+                                                                        <i class="fal fa-layer-group"></i>
+                                                                        <i class="fal fa-layer-group"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="product__content product__content-d">
+                                                                <h6><a href="product-details.html">Imported Wooden Felt
+                                                                        Cushion Chair</a></h6>
+                                                                <div class="rating mb-5">
+                                                                    <ul class="rating-d">
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <span>(01 review)</span>
+                                                                </div>
+                                                                <div class="features-des">
+                                                                    <ul>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Bass and
+                                                                                Stereo Sound.</a></li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Display
+                                                                                with 3088 x 1440 pixels resolution.</a>
+                                                                        </li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Memory,
+                                                                                Storage &amp; SIM: 12GB RAM, 256GB.</a>
+                                                                        </li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Androi
+                                                                                v10.0 Operating system.</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3">
+                                                <div class="product-stock mb-15">
+                                                    <h5>Availability: <span> 940 in stock</span></h5>
+                                                    <h6>$160.00</h6>
+                                                </div>
+                                                <div class="stock-btn ">
+                                                    <button type="button"
+                                                        class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100">
+                                                        Add to Catrss
+                                                    </button>
+                                                    <button type="button"
+                                                        class="wc-checkout d-flex align-items-center justify-content-center w-100"
+                                                        data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                        Quick View
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-item-pd">
+                                        <div class="row align-items-center">
+                                            <div class="col-xl-9">
+                                                <div
+                                                    class="single-features-item single-features-item-df b-radius mb-20">
+                                                    <div class="row  g-0 align-items-center">
+                                                        <div class="col-md-4">
+                                                            <div class="features-thum">
+                                                                <div class="features-product-image w-img">
+                                                                    <a href="product-details.html"><img
+                                                                            src="{% static 'assets/img/product/sm-5.jpg' %}"
+                                                                            alt=""></a>
+                                                                </div>
+                                                                <div class="product__offer">
+                                                                    <span class="discount">-15%</span>
+                                                                </div>
+                                                                <div class="product-action">
+                                                                    <a href="#" class="icon-box icon-box-1"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#productModalId">
+                                                                        <i class="fal fa-eye"></i>
+                                                                        <i class="fal fa-eye"></i>
+                                                                    </a>
+                                                                    <a href="#" class="icon-box icon-box-1">
+                                                                        <i class="fal fa-heart"></i>
+                                                                        <i class="fal fa-heart"></i>
+                                                                    </a>
+                                                                    <a href="#" class="icon-box icon-box-1">
+                                                                        <i class="fal fa-layer-group"></i>
+                                                                        <i class="fal fa-layer-group"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="product__content product__content-d">
+                                                                <h6><a href="product-details.html">Sunhouse Decorative
+                                                                        Lights – Imported</a></h6>
+                                                                <div class="rating mb-5">
+                                                                    <ul class="rating-d">
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <span>(01 review)</span>
+                                                                </div>
+                                                                <div class="features-des">
+                                                                    <ul>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Bass and
+                                                                                Stereo Sound.</a></li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Display
+                                                                                with 3088 x 1440 pixels resolution.</a>
+                                                                        </li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Memory,
+                                                                                Storage &amp; SIM: 12GB RAM, 256GB.</a>
+                                                                        </li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Androi
+                                                                                v10.0 Operating system.</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3">
+                                                <div class="product-stock mb-15">
+                                                    <h5>Availability: <span> 940 in stock</span></h5>
+                                                    <h6>$125.00</h6>
+                                                </div>
+                                                <div class="stock-btn ">
+                                                    <button type="button"
+                                                        class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100">
+                                                        Add to Catrss
+                                                    </button>
+                                                    <button type="button"
+                                                        class="wc-checkout d-flex align-items-center justify-content-center w-100"
+                                                        data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                        Quick View
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-item-pd">
+                                        <div class="row align-items-center">
+                                            <div class="col-xl-9">
+                                                <div
+                                                    class="single-features-item single-features-item-df b-radius mb-20">
+                                                    <div class="row  g-0 align-items-center">
+                                                        <div class="col-md-4">
+                                                            <div class="features-thum">
+                                                                <div class="features-product-image w-img">
+                                                                    <a href="product-details.html"><img
+                                                                            src="{% static 'assets/img/product/sm-6.jpg' %}"
+                                                                            alt=""></a>
+                                                                </div>
+                                                                <div class="product-action">
+                                                                    <a href="#" class="icon-box icon-box-1"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#productModalId">
+                                                                        <i class="fal fa-eye"></i>
+                                                                        <i class="fal fa-eye"></i>
+                                                                    </a>
+                                                                    <a href="#" class="icon-box icon-box-1">
+                                                                        <i class="fal fa-heart"></i>
+                                                                        <i class="fal fa-heart"></i>
+                                                                    </a>
+                                                                    <a href="#" class="icon-box icon-box-1">
+                                                                        <i class="fal fa-layer-group"></i>
+                                                                        <i class="fal fa-layer-group"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="product__content product__content-d">
+                                                                <h6><a href="product-details.html">Korea Stainless Steel
+                                                                        Pot Set 5 Piecs</a></h6>
+                                                                <div class="rating mb-5">
+                                                                    <ul class="rating-d">
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <span>(01 review)</span>
+                                                                </div>
+                                                                <div class="features-des">
+                                                                    <ul>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Bass and
+                                                                                Stereo Sound.</a></li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Display
+                                                                                with 3088 x 1440 pixels resolution.</a>
+                                                                        </li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Memory,
+                                                                                Storage &amp; SIM: 12GB RAM, 256GB.</a>
+                                                                        </li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Androi
+                                                                                v10.0 Operating system.</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3">
+                                                <div class="product-stock mb-15">
+                                                    <h5>Availability: <span> 940 in stock</span></h5>
+                                                    <h6>$99</h6>
+                                                </div>
+                                                <div class="stock-btn ">
+                                                    <button type="button"
+                                                        class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100">
+                                                        Add to Catrss
+                                                    </button>
+                                                    <button type="button"
+                                                        class="wc-checkout d-flex align-items-center justify-content-center w-100"
+                                                        data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                        Quick View
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-item-pd">
+                                        <div class="row align-items-center">
+                                            <div class="col-xl-9">
+                                                <div
+                                                    class="single-features-item single-features-item-df b-radius mb-20">
+                                                    <div class="row  g-0 align-items-center">
+                                                        <div class="col-md-4">
+                                                            <div class="features-thum">
+                                                                <div class="features-product-image w-img">
+                                                                    <a href="product-details.html"><img
+                                                                            src="{% static 'assets/img/product/sm-7.jpg' %}"
+                                                                            alt=""></a>
+                                                                </div>
+                                                                <div class="product-action">
+                                                                    <a href="#" class="icon-box icon-box-1"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#productModalId">
+                                                                        <i class="fal fa-eye"></i>
+                                                                        <i class="fal fa-eye"></i>
+                                                                    </a>
+                                                                    <a href="#" class="icon-box icon-box-1">
+                                                                        <i class="fal fa-heart"></i>
+                                                                        <i class="fal fa-heart"></i>
+                                                                    </a>
+                                                                    <a href="#" class="icon-box icon-box-1">
+                                                                        <i class="fal fa-layer-group"></i>
+                                                                        <i class="fal fa-layer-group"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="product__content product__content-d">
+                                                                <h6><a href="product-details.html">HP Stainless Steel
+                                                                        Hot Water Bottle</a></h6>
+                                                                <div class="rating mb-5">
+                                                                    <ul class="rating-d">
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <span>(01 review)</span>
+                                                                </div>
+                                                                <div class="features-des">
+                                                                    <ul>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Bass and
+                                                                                Stereo Sound.</a></li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Display
+                                                                                with 3088 x 1440 pixels resolution.</a>
+                                                                        </li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Memory,
+                                                                                Storage &amp; SIM: 12GB RAM, 256GB.</a>
+                                                                        </li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Androi
+                                                                                v10.0 Operating system.</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3">
+                                                <div class="product-stock mb-15">
+                                                    <h5>Availability: <span> 940 in stock</span></h5>
+                                                    <h6>$125.00</h6>
+                                                </div>
+                                                <div class="stock-btn ">
+                                                    <button type="button"
+                                                        class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100">
+                                                        Add to Catrss
+                                                    </button>
+                                                    <button type="button"
+                                                        class="wc-checkout d-flex align-items-center justify-content-center w-100"
+                                                        data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                        Quick View
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-item-pd">
+                                        <div class="row align-items-center">
+                                            <div class="col-xl-9">
+                                                <div
+                                                    class="single-features-item single-features-item-df b-radius mb-20">
+                                                    <div class="row  g-0 align-items-center">
+                                                        <div class="col-md-4">
+                                                            <div class="features-thum">
+                                                                <div class="features-product-image w-img">
+                                                                    <a href="product-details.html"><img
+                                                                            src="{% static 'assets/img/product/sm-8.jpg' %}"
+                                                                            alt=""></a>
+                                                                </div>
+                                                                <div class="product-action">
+                                                                    <a href="#" class="icon-box icon-box-1"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#productModalId">
+                                                                        <i class="fal fa-eye"></i>
+                                                                        <i class="fal fa-eye"></i>
+                                                                    </a>
+                                                                    <a href="#" class="icon-box icon-box-1">
+                                                                        <i class="fal fa-heart"></i>
+                                                                        <i class="fal fa-heart"></i>
+                                                                    </a>
+                                                                    <a href="#" class="icon-box icon-box-1">
+                                                                        <i class="fal fa-layer-group"></i>
+                                                                        <i class="fal fa-layer-group"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="product__content product__content-d">
+                                                                <h6><a href="product-details.html">The North Face Womens
+                                                                        Resolve 2 Jack</a></h6>
+                                                                <div class="rating mb-5">
+                                                                    <ul class="rating-d">
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                        <li><a href="#"><i class="fal fa-star"></i></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <span>(01 review)</span>
+                                                                </div>
+                                                                <div class="features-des">
+                                                                    <ul>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Bass and
+                                                                                Stereo Sound.</a></li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Display
+                                                                                with 3088 x 1440 pixels resolution.</a>
+                                                                        </li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Memory,
+                                                                                Storage &amp; SIM: 12GB RAM, 256GB.</a>
+                                                                        </li>
+                                                                        <li><a href="product-details.html"><i
+                                                                                    class="fas fa-circle"></i> Androi
+                                                                                v10.0 Operating system.</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3">
+                                                <div class="product-stock mb-15">
+                                                    <h5>Availability: <span> 940 in stock</span></h5>
+                                                    <h6>$140.00</h6>
+                                                </div>
+                                                <div class="stock-btn ">
+                                                    <button type="button"
+                                                        class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100">
+                                                        Add to Catrss
+                                                    </button>
+                                                    <button type="button"
+                                                        class="wc-checkout d-flex align-items-center justify-content-center w-100"
+                                                        data-bs-toggle="modal" data-bs-target="#productModalId">
+                                                        Quick View
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tp-pagination text-center">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="basic-pagination pt-30 pb-30">
+                                        <nav>
+                                            <ul>
+                                                <li>
+                                                    <a href="shop.html" class="active">1</a>
+                                                </li>
+                                                <li>
+                                                    <a href="shop.html">2</a>
+                                                </li>
+                                                <li>
+                                                    <a href="shop.html">3</a>
+                                                </li>
+                                                <li>
+                                                    <a href="shop.html">5</a>
+                                                </li>
+                                                <li>
+                                                    <a href="shop.html">6</a>
+                                                </li>
+                                                <li>
+                                                    <a href="shop.html">
+                                                        <i class="fal fa-angle-double-right"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- shop-area-end -->
+
+        <!-- shop modal start -->
+        {% for i in products %}
+
+
+        <div class="modal fade" id="productModalId-{{forloop.counter}}" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered product__modal" role="document">
+                <div class="modal-content">
+                    <div class="product__modal-wrapper p-relative">
+                        <div class="product__modal-close p-absolute">
+                            <button data-bs-dismiss="modal"><i class="fal fa-times"></i></button>
+                        </div>
+                        <div class="product__modal-inner">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="product__modal-box">
+                                        <div class="tab-content" id="modalTabContent">
+                                            <div class="tab-pane fade show active" id="nav1" role="tabpanel"
+                                                aria-labelledby="nav1-tab">
+                                                <div class="product__modal-img w-img">
+                                                    <img src="/media/{{i.image}}" alt="">
+                                                </div>
+                                            </div>
+
+                                            {% for j in i.product_image_set.all %}
+                                            <div class="tab-pane fade show" id="nav{{j.id}}" role="tabpanel"
+                                                aria-labelledby="nav{{j.id}}-tab">
+                                                <div class="product__modal-img w-img">
+                                                    <img src="{{j.image_url}}" alt="">
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+
+
+
+                                        </div>
+                                        <ul class="nav nav-tabs" id="modalTab" role="tablist">
+                                            {% for j in i.product_image_set.all %}
+
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="nav{{j.id}}-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#nav{{j.id}}" type="button" role="tab"
+                                                    aria-controls="nav{{j.id}}" aria-selected="true">
+                                                    <img src="{{j.image_url}}" style="height: 8rem;" alt="">
+                                                </button>
+                                            </li>
+                                            {% endfor %}
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="product__modal-content">
+                                        <h4><a href="product-details.html">{{i.name|capfirst}}</a></h4>
+                                        <div class="product__review d-sm-flex">
+                                            <div class="rating rating__shop mb-10 mr-30">
+                                                <ul>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="product__add-review mb-15">
+                                                <span>01 review</span>
+                                            </div>
+                                        </div>
+                                        <div class="product__price">
+                                            <span> &#8377 {{i.price}}</span>
+                                        </div>
+                                        <div class="product__modal-des mt-20 mb-15"
+                                            style="height: 15rem;overflow-y: scroll;">
+                                            <ul>
+
+                                                <!-- <li>{{ i.Product_info|safe }}</li> -->
+                                                <li>{{ i.Product_info|safe }}</li>
+
+                                            </ul>
+                                        </div>
+                                        <div class="product__stock mb-20">
+                                            <span class="mr-10">Availability :</span>
+                                            <span>{{i.Availability}} in stock</span>
+                                        </div>
+                                        <div class="product__modal-form">
+                                            <form action="#">
+                                                <div class="pro-quan-area d-lg-flex align-items-center">
+                                                    <div class="product-quantity mr-20 mb-25">
+                                                        <div class="cart-plus-minus p-relative"><input type="text"
+                                                                value="1" /></div>
+                                                    </div>
+                                                    <div class="pro-cart-btn mb-25">
+                                                        <a class="cart-btn" href="{% url 'cart_add_shop' i.id %}"
+                                                            type="submit">Add to Catrss</a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="product__stock mb-30">
+                                            <ul>
+                                                <li><a href="#">
+                                                        <span class="sku mr-10">SKU:</span>
+                                                        <span>Samsung C49J89: £875, Debenhams Plus</span></a>
+                                                </li>
+                                                <li><a href="#">
+                                                        <span class="cat mr-10">Categories:</span>
+                                                        <span>
+                                                            <cus>{{i.Category}}</cus>
+                                                        </span></a>
+                                                </li>
+                                                <li><a href="#">
+                                                        <span class="tag mr-10">Tags:</span>
+                                                        <span>{{i.Tags}}</span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- shop modal end -->
+
+    </main>
+
+    <!-- footer-start -->
+    <footer>
+        <div class="fotter-area d-dark-bg">
+            <div class="footer__top pt-80 pb-15">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-4 order-last-md">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <div class="footer__widget">
+                                        <div class="footer__widget-title">
+                                            <h4>Customer Care</h4>
+                                        </div>
+                                        <div class="footer__widget-content">
+                                            <div class="footer__link">
+                                                <ul>
+                                                    <li><a href="faq.html">New Customers</a></li>
+                                                    <li><a href="faq.html">How to use Account</a></li>
+                                                    <li><a href="faq.html">Placing an Order</a></li>
+                                                    <li><a href="faq.html">Payment Methods</a></li>
+                                                    <li><a href="faq.html">Delivery &amp; Dispatch</a></li>
+                                                    <li><a href="faq.html">Problems with Order</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <div class="footer__widget">
+                                        <div class="footer__widget-title">
+                                            <h4>Customer Service</h4>
+                                        </div>
+                                        <div class="footer__widget-content">
+                                            <div class="footer__link">
+                                                <ul>
+                                                    <li><a href="faq.html">Help Center</a></li>
+                                                    <li><a href="faq.html">Contact Us</a></li>
+                                                    <li><a href="faq.html">Report Abuse</a></li>
+                                                    <li><a href="faq.html">Submit a Dispute</a></li>
+                                                    <li><a href="faq.html">Policies &amp; Rules</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-7 col-lg-8 order-first-md">
+                            <div class="footer__top-left">
+                                <div class="row">
+
+                                    <div class="col-xl-7 col-lg-6 col-md-6 col-sm-6">
+                                        <div class="row">
+
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                <div class="footer__widget">
+                                                    <div class="footer__widget-title">
+                                                        <h4>My Account</h4>
+                                                    </div>
+                                                    <div class="footer__widget-content">
+                                                        <div class="footer__link">
+                                                            <ul>
+                                                                <li><a href="/">Product Support</a></li>
+                                                                <li><a href="checkout.html">Checkout</a></li>
+                                                                <li><a href="/cart/cart-detail/">Shopping Cart</a></li>
+                                                                <li><a href="wishlist.html">Wishlist</a></li>
+                                                                <li><a href="faq.html">Terms &amp; Conditions &amp;</a>
+                                                                </li>
+                                                                <li><a href="faq.html">Redeem Voucher</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                <div class="footer__widget">
+                                                    <div class="footer__widget-title">
+                                                        <h4>Quick Links</h4>
+                                                    </div>
+                                                    <div class="footer__widget-content">
+                                                        <div class="footer__link">
+                                                            <ul>
+                                                                <li><a href="/contact/">Store Location</a></li>
+                                                                <li><a href="/my-account/">My account</a></li>
+                                                                <li><a href="/">Order Tracking</a></li>
+                                                                <li><a href="/">FAQs</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-5 col-lg-6 col-md-6 col-sm-6">
+                                        <div class="footer__widget">
+                                            <div class="footer__widget-title mb-20">
+                                                <h4>About The Store</h4>
+                                            </div>
+                                            <div class="footer__widget-content">
+                                                <p class="footer-text mb-35">Our mission statement is to provide the
+                                                    absolute best customer experience available in the Electronic
+                                                    industry without exception.</p>
+                                                <div class="footer__hotline d-flex align-items-center mb-10">
+                                                    <div class="icon mr-15">
+                                                        <i class="fal fa-headset"></i>
+                                                    </div>
+                                                    <div class="text">
+                                                        <h4>Got Question? Call us 24/7!</h4>
+                                                        <span><a href="tel:100-123-456-7890">(+100) 123 456
+                                                                7890</a></span>
+                                                    </div>
+                                                </div>
+                                                <div class="footer__info">
+                                                    <ul>
+                                                        <li>
+                                                            <span>Add: <a target="_blank"
+                                                                    href="https://goo.gl/maps/c82DDZ8ALvL878Bv8">Walls
+                                                                    Street 68, Mahattan, New York, USA</a></span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <div class="container">
+                    <div class="footer__bottom-content pt-55 pb-45">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="footer__links text-center mb-25">
+                                    <p>
+                                        <a href="faq.html">Online Shopping</a>
+                                        <a href="faq.html">Promotions</a>
+                                        <a href="faq.html">My Orders</a>
+                                        <a href="faq.html">Help</a>
+                                        <a href="faq.html">Customer Service</a>
+                                        <a href="faq.html">Support</a>
+                                        <a href="faq.html">Most Populars</a>
+                                        <a href="faq.html">New Arrivals</a>
+                                        <a href="faq.html">Special Products </a>
+                                        <a href="faq.html">Manufacturers</a>
+                                        <br>
+                                        <a href="faq.html">Garden Equipments</a>
+                                        <a href="faq.html">Powers And Hand Tools </a>
+                                        <a href="faq.html">Utensil &amp; Gadget </a>
+                                        <a href="faq.html">Printers</a>
+                                        <a href="faq.html">Projectors</a>
+                                        <a href="faq.html">Scanners</a>
+                                        <a href="faq.html">Store</a>
+                                        <a href="faq.html">Business</a>
+                                    </p>
+                                </div>
+                                <div class="payment-image text-center mb-25">
+                                    <a href="contact.html"><img src="{% static 'assets/img/payment/payment.png' %}"
+                                            alt=""></a>
+                                </div>
+                                <div class="copy-right-area text-center">
+                                    <p>Copyright © <span>VStore.</span> All Rights Reserved. Powered by <a
+                                            href="#"><span class="main-color">Theme_Pure.</span></a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer-end -->
+
+    <!-- JS here -->
+    <script src="{% static 'assets/js/vendor/jquery.js' %}"></script>
+    <script src="{% static 'assets/js/vendor/waypoints.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap-bundle.js' %}"></script>
+    <script src="{% static 'assets/js/meanmenu.js' %}"></script>
+    <script src="{% static 'assets/js/swiper-bundle.js' %}"></script>
+    <script src="{% static 'assets/js/tweenmax.js' %}"></script>
+    <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+    <script src="{% static 'assets/js/magnific-popup.js' %}"></script>
+    <script src="{% static 'assets/js/parallax.js' %}"></script>
+    <script src="{% static 'assets/js/backtotop.js' %}"></script>
+    <script src="{% static 'assets/js/nice-select.js' %}"></script>
+    <script src="{% static 'assets/js/countdown.min.js' %}"></script>
+    <script src="{% static 'assets/js/counterup.js' %}"></script>
+    <script src="{% static 'assets/js/ui-slider-range.js' %}"></script>
+    <script src="{% static 'assets/js/wow.js' %}"></script>
+    <script src="{% static 'assets/js/isotope-pkgd.js' %}"></script>
+    <script src="{% static 'assets/js/imagesloaded-pkgd.js' %}"></script>
+    <script src="{% static 'assets/js/ajax-form.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+   
+    const rangeInput = document.querySelectorAll(".range-input input")
+    var min_price = document.getElementById('min_price') 
+    var max_price = document.getElementById('max_price') 
+  priceInput = document.querySelectorAll(".price-input input"),
+  range = document.querySelector(".slider .progress");
+let priceGap = 1000;
+
+priceInput.forEach((input) => {
+  input.addEventListener("input", (e) => {
+    let minPrice = parseInt(priceInput[0].value),
+      maxPrice = parseInt(priceInput[1].value);
+
+    if (maxPrice - minPrice >= priceGap && maxPrice <= rangeInput[1].max) {
+      if (e.target.className === "input-min") {
+        rangeInput[0].value = minPrice;
+        range.style.left = (minPrice / rangeInput[0].max) * 100 + "%";
+      } else {
+        rangeInput[1].value = maxPrice;
+        range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+      }
+    }
+  });
+});
+
+rangeInput.forEach((input) => {
+  input.addEventListener("input", (e) => {
+    let minVal = parseInt(rangeInput[0].value),
+      maxVal = parseInt(rangeInput[1].value);
+
+    if (maxVal - minVal < priceGap) {
+      if (e.target.className === "range-min") {
+        rangeInput[0].value = maxVal - priceGap;
+      } else {
+        rangeInput[1].value = minVal + priceGap;
+      }
+    } else {
+      priceInput[0].value = minVal;
+      priceInput[1].value = maxVal;
+      range.style.left = (minVal / rangeInput[0].max) * 100 + "%";
+      range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
+    }
+    min_price.value=minVal
+    max_price.value=maxVal
+  });
+});
+
+
+
+
+
+
+
+
+
+
+    // _______________________
+
+    
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    // Wait for the page to fully load
+    window.onload = function () {
+        // Get the subcategory ID from the URL
+        var subcategoryId = getParameterByName('sub_category');
+
+        // Now you can use the subcategoryId in your code
+        document.getElementById('sub_category_url').value = subcategoryId
+    };
+
+
+    function addFilterToUrl() {
+    var currentUrl = window.location.href;
+    var filterParams = '&color=red&brand=Apple'; // Adjust filter values accordingly
+    var newUrl;
+
+    if (currentUrl.includes('?')) {
+        // If the URL already has a query string
+        newUrl = currentUrl + filterParams;
+    } else {
+        // If the URL doesn't have a query string
+        newUrl = currentUrl + '?query_pass=mob' + filterParams;
+    }
+
+    // Update the href attribute of your link
+    document.getElementById('filterLink').href = newUrl;
+    console.log(newUrl)
+}
+</script>
+
+</body>
+
+</html>

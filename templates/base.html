@@ -1,0 +1,308 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<!-- Mirrored from themepure.net/template/dukamarket/dukamarket/index-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 19 Feb 2022 17:22:23 GMT -->
+<head>
+{% load static %}
+      <meta charset="utf-8">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <title>Vindus Online Store</title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Place favicon.ico in the root directory -->
+      <!-- <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.png' %}"> -->
+      <!-- CSS here -->
+      <link rel="stylesheet" href="{% static 'assets/css/preloader.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/css/meanmenu.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/css/owl-carousel.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/css/swiper-bundle.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/css/backtotop.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/flaticon/flaticon.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/css/font-awesome-pro.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/css/default.css' %}">
+      <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+      
+  <!-- JS here -->
+  <script defer  src="{% static 'assets/js/vendor/jquery.js' %}"></script>
+  <script defer  src="{% static 'assets/js/vendor/waypoints.js' %}"></script>
+  <script defer  src="{% static 'assets/js/bootstrap-bundle.js' %}"></script>
+  <script defer  src="{% static 'assets/js/meanmenu.js' %}"></script>
+  <script defer  src="{% static 'assets/js/swiper-bundle.js' %}"></script>
+  <script defer  src="{% static 'assets/js/owl-carousel.js' %}"></script>
+  <script defer  src="{% static 'assets/js/tweenmax.js' %}"></script>
+  <script defer  src="{% static 'assets/js/magnific-popup.js' %}"></script>
+  <script defer  src="{% static 'assets/js/parallax.js' %}"></script>
+  <script defer  src="{% static 'assets/js/backtotop.js' %}"></script>
+  <script defer  src="{% static 'assets/js/nice-select.js' %}"></script>
+ <script  defer src="{% static 'assets/js/countdown.min.js' %}"></script>
+ <script  defer src="{% static 'assets/js/counterup.js' %}"></script>
+ <script  defer src="{% static 'assets/js/wow.js' %}"></script>
+ <script  defer src="{% static 'assets/js/isotope-pkgd.js' %}"></script>
+ <script  defer src="{% static 'assets/js/imagesloaded-pkgd.js' %}"></script>
+ <script  defer src="{% static 'assets/js/ajax-form.js' %}"></script>
+ <script  defer type="text/javascript" src="{% static 'assets/js/main.js' %}"></script>
+   </head>
+   <body>
+      <!--[if lte IE 9]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+      <![endif]-->
+
+
+    <!-- preloader start -->
+
+    <!-- preloader end -->
+
+    <!-- back to top start -->
+      <div class="progress-wrap">
+         <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+         </svg>
+      </div>
+      <!-- back to top end -->
+
+
+      {% include 'includes/header.html' %}
+
+
+      {% block content %}
+      {% endblock %}
+      
+      <!-- {% include "includes/features.html" %} -->
+      <!-- {% block smbanner %}
+        
+      {% endblock smbanner %}
+
+     {% block Deals %}
+       
+     {% endblock Deals %} -->
+
+
+     
+    <!-- offcanvas area start -->
+    <div class="offcanvas__area">
+        <div class="offcanvas__wrapper">
+        <div class="offcanvas__close">
+            <button class="offcanvas__close-btn" id="offcanvas__close-btn">
+                <i class="fal fa-times"></i>
+            </button>
+        </div>
+        <div class="offcanvas__content">
+            <div class="offcanvas__logo mb-40">
+                <a href="index.html">
+                <img src="{% static 'assets/img/logo/logo-white.png" alt="logo">
+                </a>
+            </div>
+            <div class="offcanvas__search mb-25">
+                <form action="#">
+                    <input type="text" placeholder="What are you searching for?">
+                    <button type="submit" ><i class="far fa-search"></i></button>
+                </form>
+            </div>
+            <div class="sidebar__img mb-20">
+                <div class="row gx-2">
+                   <div class="col-4">
+                      <div class="sidebar__single-img hover-effect w-img mb-10">
+                         <a class="popup-image" href="{% static 'assets/img/gallery/gal-1.jpg' %}">>
+                            <img src="{% static 'assets/img/gallery/gal-1.jpg' %}"> alt="">
+                         </a>
+                      </div>
+                   </div>
+                   <div class="col-4">
+                      <div class="sidebar__single-img hover-effect w-img mb-10">
+                         <a class="popup-image" href="{% static 'assets/img/gallery/gal-2.jpg' %}">>
+                            <img src="{% static 'assets/img/gallery/gal-2.jpg' %}"> alt="">
+                         </a>
+                      </div>
+                   </div>
+                   <div class="col-4">
+                      <div class="sidebar__single-img hover-effect w-img mb-10">
+                         <a class="popup-image" href="{% static 'assets/img/gallery/gal-3.jpg' %}">>
+                            <img src="{% static 'assets/img/gallery/gal-3.jpg' %}"> alt="">
+                         </a>
+                      </div>
+                   </div>
+                   <div class="col-4">
+                      <div class="sidebar__single-img hover-effect w-img mb-10">
+                         <a class="popup-image" href="{% static 'assets/img/gallery/gal-4.jpg' %}">>
+                            <img src="{% static 'assets/img/gallery/gal-4.jpg' %}"> alt="">
+                         </a>
+                      </div>
+                   </div>
+                   <div class="col-4">
+                      <div class="sidebar__single-img hover-effect w-img mb-10">
+                         <a class="popup-image" href="{% static 'assets/img/gallery/gal-5.jpg' %}">>
+                            <img src="{% static 'assets/img/gallery/gal-5.jpg' %}"> alt="">
+                         </a>
+                      </div>
+                   </div>
+                   <div class="col-4">
+                      <div class="sidebar__single-img hover-effect w-img mb-10">
+                         <a class="popup-image" href="{% static 'assets/img/gallery/gal-6.jpg' %}">>
+                            <img src="{% static 'assets/img/gallery/gal-6.jpg' %}"> alt="">
+                         </a>
+                      </div>
+                   </div>
+                </div>
+             </div>
+            <div class="mobile-menu-2"></div>
+            <div class="offcanvas__action">
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- offcanvas area end -->
+   
+
+
+       <!-- footer-start -->
+
+       <!-- footer-end -->
+       
+       <!-- footer-start -->
+    <footer>
+      <div class="fotter-area d-ddark-bg">
+          <div class="footer__top pt-60 pb-10">
+              <div class="container 0">
+                  <div class="row">
+                      <div class="col-xxl-3 col-xl-4 col-lg-5 col-md-8">
+                          <div class="footer__widget">
+                              <div class="footer__widget-title mb-20">
+                                  <h4>About The Store</h4>
+                              </div>
+                              <div class="footer__widget-content">
+                                  <p class="footer-text mb-25">Our mission statement is to provide the absolute best customer experience available in the Electronic industry without exception.</p>
+                                  <div class="footer__hotline d-flex align-items-center mb-10">
+                                      <div class="icon icon-2 mr-15">
+                                          <i class="fal fa-headset"></i>
+                                      </div>
+                                      <div class="text text-2">
+                                          <h4>Got Question? Call us 24/7!</h4>
+                                          <span><a href="tel:9912643756">+91 9912643756</a></span>
+                                      </div>
+                                  </div>
+                                  <div class="footer__info">
+                                      <ul>
+                                          <li>
+                                              <span>Add:  <a target="_blank" href="https://goo.gl/maps/c82DDZ8ALvL878Bv8">Vindus Pvt. Ltd, Dishuknagar</a></span>
+                                          </li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                          <div class="footer__widget footer-col-2">
+                              <div class="footer__widget-title">
+                                  <h4>My Account</h4>
+                              </div>
+                              <div class="footer__widget-content">
+                                  <div class="footer__link footer__link-2">
+                                      <ul>
+                                          <li><a href="contact.html">Product Support</a></li>
+                                          <li><a href="checkout.html">Checkout</a></li>
+                                          <li><a href="cart.html">Shopping Cart</a></li>
+                                          <li><a href="wishlist.html">Wishlist</a></li>
+                                          <li><a href="faq.html">Terms &amp; Conditions &amp;</a></li>
+                                          <li><a href="faq.html">Redeem Voucher</a></li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                          <div class="footer__widget footer-col-2">
+                              <div class="footer__widget-title">
+                                  <h4>Customer Care</h4>
+                              </div>
+                              <div class="footer__widget-content">
+                                  <div class="footer__link footer__link-2">
+                                      <ul>
+                                          <li><a href="faq.html">New Customers</a></li>
+                                          <li><a href="faq.html">How to use Account</a></li>
+                                          <li><a href="faq.html">Placing an Order</a></li>
+                                          <li><a href="faq.html">Payment Methods</a></li>
+                                          <li><a href="faq.html">Delivery &amp; Dispatch</a></li>
+                                          <li><a href="faq.html">Problems with Order</a></li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-xxl-2 col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                          <div class="footer__widget footer-col-2">
+                              <div class="footer__widget-title">
+                                  <h4>Customer Service</h4>
+                              </div>
+                              <div class="footer__widget-content">
+                                  <div class="footer__link footer__link-2">
+                                      <ul>
+                                          <li><a href="faq.html">Help Center</a></li>
+                                          <li><a href="contact.html">Contact Us</a></li>
+                                          <li><a href="faq.html">Report Abuse</a></li>
+                                          <li><a href="faq.html">Submit a Dispute</a></li>
+                                          <li><a href="faq.html">Policies &amp; Rules</a></li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-xxl-3 col-xl-4 col-lg-5 col-md-6">
+                          <div class="footer__widget">
+                              <div class="footer__widget-title mb-20">
+                                  <h4>Sign Up To Newsletter</h4>
+                              </div>
+                              <div class="footer__widget-content">
+                                  <p class="footer-text mb-25">Join 60.000+ subscribers and get a new discount coupon  on every Saturday.</p>
+                                  <div class="footer__newsletter-form">
+                                      <form action="#">
+                                          <input class="ft-newsl b-radius" type="email" placeholder="Enter your email ...">
+                                          <button class="ft-newsl-btn" type="submit">subscribe</button>
+                                      </form>
+                                      </div>
+                                  <p class="provide-text mt-20">By providing your email address, you agree to our <br> <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a> .</p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="footer__bottom-2">
+              <div class="container 0">
+                  <div class="footer__bottom-content footer__bottom-content-2 pt-50 pb-50">
+                      <div class="row">
+                          <div class="col-xl-12">
+                              <div class="footer__links footer__links-d text-center mb-25">
+                                  <p>
+                                      <a href="about.html">About Us</a>
+                                      <a href="contact.html">Delivery & Return</a>
+                                      <a href="faq.html">Privacy Policy</a>
+                                      <a href="faq.html">Help</a>
+                                      <a href="faq.html">Order Tracking</a>
+                                      <a href="contact.html">Contact Us</a>
+                                      <a href="faq.html">FAQs </a>
+                                  </p>
+                              </div>
+                              <div class="payment-image text-center mb-25">
+                                  <a href="#"><img src="assets/img/payment/payment.png" alt=""></a>
+                              </div>
+                              <div class="copy-right-area copy-right-area-2 text-center">
+                                  <p>Copyright © <span>VMart.</span> All Rights Reserved. Powered by <a href="#"><span class="main-color">Vindus.</span></a></p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+  <!-- footer-end -->
+
+ <script src="../static/assets/js/main.js"></script>
+
+ </body>
+
+ </html>

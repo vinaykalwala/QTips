@@ -1,0 +1,71 @@
+{% load product_tags %}
+
+{% for i in products %}
+
+<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+    <div class="product__item product__item-d"
+        style="width: auto;height: 100%;display: flex;flex-direction: column;justify-content: space-between;">
+        <div class="product__thumb fix">
+            <div class="product-image w-img">
+                <a href="{{i.get_absolute_url}}">
+                    <img src="/media/{{i.image}}" alt="product">
+                </a>
+            </div>
+            <div class="product-action">
+                <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal"
+                    data-bs-target="#productModalId-{{forloop.counter}}">
+                    <i class="fal fa-eye"></i>
+                    <i class="fal fa-eye"></i>
+                </a>
+                <a href="#" class="icon-box icon-box-1">
+                    <i class="fal fa-heart"></i>
+                    <i class="fal fa-heart"></i>
+                </a>
+                <a href="#" class="icon-box icon-box-1">
+                    <i class="fal fa-layer-group"></i>
+                    <i class="fal fa-layer-group"></i>
+                </a>
+            </div>
+        </div>
+        <div class="product__content-3">
+            <h6><a href="{{i.get_absolute_url}}">{{i.name}}</a></h6>
+            <div class="rating mb-5">
+                <ul>
+                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                    <li><a href="#"><i class="fal fa-star"></i></a></li>
+                </ul>
+                <span>(01 review)</span>
+            </div>
+            <div>
+                <del><span>&#8377</span>{{i.price|floatformat:0 }}</del>
+            </div>
+            <div class="price mb-10">
+                <span> <span>&#8377</span>{% calculate_pricetag i.price i.Discount %}</span>
+            </div>
+        </div>
+        <div class="product__add-cart-s text-center">
+            {% if i.id in cart_products %}
+
+            <a href="/cart/cart-detail/"><button type="button"
+                    class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100 added">
+                    Added
+                </button>
+            </a>
+            {% else %}
+            <!-- <a href="{% url 'cart_add' i.id %}"></a> -->
+            <a type="button" href="{% url 'cart_add_shop' i.slug %}" class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100"
+                >
+                Add to Cart
+            </a>
+            {% endif %}
+            <button type="button" class="wc-checkout d-flex align-items-center justify-content-center w-100"
+                data-bs-toggle="modal" data-bs-target="#productModalId-{{forloop.counter}}">
+                Quick View
+            </button>
+        </div>
+    </div>
+</div>
+{% endfor %}

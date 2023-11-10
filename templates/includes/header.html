@@ -1,0 +1,219 @@
+<header class="header d-blue-bg">
+    <div class="header-top">
+        <div class="container">
+            <div class="header-inner">
+                {% if user.is_authenticated %}
+                <div class="row align-items-center">
+                    <div class="col-xl-6 col-lg-7">
+                        <div class="header-inner-start">
+                            
+                            <div class="support d-none d-sm-block">
+                                
+
+                                    {% for message in messages %}
+        <p class="warning_cancel_p" ><a href="{% url 'my_account' %}">{{message}}</a> <button class="warning_cancel" onclick="disable()" style="display: '{{diss}}';">x</button></lp>
+    {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+    <div class="header-mid">
+        <div class="container">
+            <div class="heade-mid-inner">
+                <div class="row align-items-center">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4">
+                        <div class="header__info">
+                            <div class="logo">
+                                <a href="/" class="logo-image"><h1 style="color: white;">VStore.in</h1></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-lg-4 d-none d-lg-block">
+                        <div class="header__search">
+                            <form role="search" method="get" action="/search/">
+                                <div class="header__search-box">
+                                    <input class="search-input" type="text" placeholder="I'm shopping for..." style="padding: 20px;" name="query_pass" id="query_pass">
+                                    <button class="button" type="submit"><i class="far fa-search"></i></button>
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-5 col-md-8 col-sm-8">
+                        <div class="header-action" style="display:flex;justify-content:space-around">
+
+                            <div class="block-cart action side-menu-btn offcanvas-toggle-btn">
+                                    <a class="icon-link icon-link-2">
+                                    <i class="flaticon-shopping-bag "></i>
+                                    <span class="count count-2">{{request.session.cart|length}}</span>
+
+                                    </a>
+                                <div class="cart">
+                                    <div class="cart__mini">
+                                        <ul>
+                                            <li>
+                                              <div class="cart__title">
+                                                <h4>Your Cart</h4>
+                                                <span>(1 Item in Cart)</span>
+                                              </div>
+                                            </li>
+                                            <li>
+                                              <div class="cart__item d-flex justify-content-between align-items-center">
+                                                <div class="cart__inner d-flex">
+                                                  <div class="cart__thumb">
+                                                    <a href="#">
+                                                      <img src="assets/img/cart/20.jpg" alt="">
+                                                    </a>
+                                                  </div>
+                                                  <div class="cart__details">
+                                                    <h6><a href="#"> Samsung C49J89: £875, Debenhams Plus  </a></h6>
+                                                    <div class="cart__price">
+                                                      <span>$255.00</span>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="cart__del">
+                                                    <a href="#"><i class="fal fa-times"></i></a>
+                                                </div>
+                                              </div>
+                                            </li>
+                                            <li>
+                                              <div class="cart__sub d-flex justify-content-between align-items-center">
+                                                <h6>Subtotal</h6>
+                                                <span class="cart__sub-total">$255.00</span>
+                                              </div>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="wc-cart mb-10">View cart</a>
+                                                <a href="#" class="wc-checkout">Checkout</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if user.is_authenticated %}
+
+                            <div class="block-userlink">
+                                <a class="icon-link" href="{% url 'my_account' %}">
+                                    <i class="flaticon-user"></i>
+                                    <span class="text">
+                                        <span class="sub">{{user.username}} </span>
+                                        My Account </span>
+                                    </a>
+                                </div>
+
+                            {% else %}
+                            <div class="block-userlink">
+                                <a class="icon-link" href="{% url 'my_account' %}">
+                                    <i class="flaticon-user"></i>
+                                    <span class="text">
+                                        <span class="sub">Login </span>
+                                        My Account </span>
+                                    </a>
+                                </div>
+                                {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header__bottom">
+        <div class="container" style="display:flex;flex-direction: row;">
+            <div class="row g-0 align-items-center" style="flex-shrink: 1;width: 100%;">
+                <div class="col-lg-3" style="flex-shrink: 1;">                        
+                    <div class="cat__menu-wrapper side-border d-none d-lg-block">
+                        <div class="cat-toggle">
+                            <button type="button" id="toggle" class="cat-toggle-btn cat-toggle-btn-1"><i class="fal fa-bars"></i> Shop by department</button>
+                                <div class="cat__menu" id="cat__menu" style="display: none;">
+                                    <nav id="mobile-menu" style="display: block;">
+                            <script>
+                               toggle.onclick = () => {
+                                cat__menu.classList.toggle("expanded");
+                                };
+
+                            </script>
+                                <!-- <nav id="mobile-menu" class="expander-content" style="display: block;"> -->
+                                    <ul>
+                                        <li>
+                                            <a href="/sub_cats/?categories=">All Categories <i class="far fa-angle-down"></i></a>
+                                            <ul class="mega-menu">
+                                                {% for i in main_category %}
+                                                <li><a href="/sub_cats/?categories={{i.id}}">{{i.name}}</a>
+                                                    <ul class="mega-item">
+                                                        {% for j in i.categorie_set.all %}
+                                                          
+                                                        <li><a href="/products/?sub_category={{i.id}}">{{j.name}}</a></li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+
+                                        {% for i in main_category %}
+
+                                        <li>
+                                            <a href="" style="pointer-events: none;">{{i.name}}<i class="far fa-angle-down"></i></a>
+                                            <ul class="mega-menu mega-menu-2">
+                                                {% for j in i.categorie_set.all %}
+
+                                                <li><a href="/sub_cats/?categories={{i.id}}">{{j.name}}</a>
+                                                    <ul class="mega-item">
+                                                        {% for k in j.sub_categorie_set.all %}
+                                                          
+                                                        <li><a href="/products/?sub_category={{i.id}}">{{k.name}}</a></li>
+                                                        {% endfor %}
+                                                        
+                                                    </ul>
+                                                </li>
+                                                {% endfor %}
+                                               
+                                            </ul>
+                                        </li>
+                                        {% endfor %}
+
+                                    
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-3" style="flex-grow: 1;">
+                  <div class="header__bottom-left d-flex d-xl-block align-items-center">
+                    <div class="side-menu d-lg-none mr-20">
+                      <button type="button" class="side-menu-btn offcanvas-toggle-btn"><i class="fas fa-bars"></i></button>
+                    </div>
+                    <div class="main-menu d-none d-lg-flex" >
+                        <nav>
+                            <ul>
+                                <li >
+                                    <a href="/" class="{% if current_page == 'home' %}active{% endif %}">Home</a>
+                                    
+                                </li>
+                                <li><a href="/about/" class="{% if current_page == 'about' %}active{% endif %}">About Us</a></li>
+                                <li ><a href="/cats/?mb_main_category=" class="{% if current_page == 'shop' %}active{% endif %}">Shop</a>
+                                    
+                                </li>
+                                
+                                <li><a href="/contact/" class="{% if current_page == 'order_tracking' %}active{% endif %}">Order Tracking</a></li>
+                                    <li><a href="/contact/" class="{% if current_page == 'contact' %}active{% endif %}">Contact Us</a></li>
+                                    <li><a href="#">FAQs</a></li>
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                  </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</header>
