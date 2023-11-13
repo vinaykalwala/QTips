@@ -15,6 +15,7 @@ from django.template.loader import render_to_string, get_template
 from Ecommerceapp import keys
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from CART.models import *
 from cart.cart import Cart
 import razorpay
 from django.db.models import Min,Max,Sum
@@ -37,7 +38,20 @@ def filter_data(request):
 
     return JsonResponse({'data': t})
 
+def cart_function(request):
+    cart = Cart(request)
+    cart_products = []
+    for item in cart.cart:
+        cart_products.append(int(item))
 
+    return cart_products
+
+def categories_function(request):
+    main_category = Main_categorie.objects.all().order_by()
+    category = Categorie.objects.all().order_by('-id')
+    Sub_category = Sub_categorie.objects.all().order_by('-id')
+
+    return main_category,category,Sub_category
 
 def index(request):
     current_page = 'home'
@@ -50,9 +64,7 @@ def index(request):
     banner_3 = Banners.objects.select_related('category').filter(section__name="Home_3").order_by('-id')
     # Banners=Banners.objects.all().order_by('-id')
     # 
-    main_category = Main_categorie.objects.all().order_by()
-    category = Categorie.objects.all().order_by('-id')
-    Sub_category = Sub_categorie.objects.all().order_by('-id')
+    main_category, category, Sub_category = categories_function(request)
     # products = Product.objects.filter(Section__name = 'New Arival')
     partners = Partners.objects.all().order_by('-id')
     products = Product.objects.all()
@@ -64,10 +76,7 @@ def index(request):
     top_discount_products = Product.objects.order_by('-Discount')[:10]
     
 
-    cart = Cart(request)
-    cart_products = []
-    for item in cart.cart:
-        cart_products.append(int(item))
+    cart_products = cart_function(request)
 
 
     params= {
@@ -91,18 +100,6 @@ def index(request):
 
     return render(request,'../templates/Main/index.html',context=params)
 
-
-# def product_detail(request, slug):
-#     product = Product.objects.get(slug=slug)
-#     comments = Comment.objects.filter(product=product)
-#     likes = Like.objects.filter(product=product)
-
-#     context = {
-#         'product': product,
-#         'comments': comments,
-#         'likes': likes,
-#     }
-#     return render(request, 'product_detail.html', context)
 
 def rate_product(request, slug):
     if request.method == 'POST':
@@ -301,6 +298,13 @@ def PRODUCTS(request):
     for item in cart.cart:
         cart_products.append(int(item))
 
+    main_category, category, Sub_category = categories_function(request)
+    params.update({
+        "main_category":main_category,
+        'Sub_category':Sub_category,
+        'category':category
+    })
+
     
     params['category']=category
     params['subcategory']=subcategory
@@ -310,57 +314,6 @@ def PRODUCTS(request):
     
     return render(request,'../templates/Main/shop.html',context=params)
 
-
-
-def filter_products(request):
-    if request.method == 'POST':
-        # Get filter parameters from the form
-        min_price = request.POST.get('min_price', 0)
-        max_price = request.POST.get('max_price', float('inf'))
-        selected_colors_list = request.POST.getlist('color')
-        selected_sizes_list = request.POST.getlist('size')
-        selected_brands_list = request.POST.getlist('brands')
-
-        # Convert the received values to integers
-        selected_colors = [int(color_id) for color_id in selected_colors_list]
-        selected_sizes = [int(size_id) for size_id in selected_sizes_list]
-        selected_brands = [int(brand_id) for brand_id in selected_brands_list]
-
-        # Filter products based on selected options
-        products = Product.objects.filter(
-            price__range=(min_price, max_price),
-            color__in=selected_colors if selected_colors else Color.objects.values_list('id', flat=True),
-            size__in=selected_sizes if selected_sizes else Size.objects.values_list('id', flat=True),
-            brand__id__in=selected_brands if selected_brands else Brands.objects.values_list('id', flat=True),
-        )
-
-        # Render the template with the filtered products
-        return render(request, 'Main/shop.html', {'products': products})
-
-    # Handle GET request, render the initial form
-    return render(request, 'Main/shop.html', {})
-
-
-def add_to_cart(request):
-    if request.method == 'POST':
-        # Your logic to determine the product or variant to add to the cart
-        # ...
-
-        # For example, adding a product with id
-        product_id = request.POST.get('product_id')
-        quantity = 1
-
-        # Use the cart_add view to add the product to the cart
-        response = cart_add(request, product_id, quantity)
-
-        # You can customize the response as needed
-        if response.get('status') == 'success':
-            return JsonResponse({'status': 'success'})
-        else:
-            return JsonResponse({'status': 'error', 'message': 'Error adding to cart'})
-
-    else:
-        return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
 
 
 def CATS(request):
@@ -413,10 +366,8 @@ def SUBCATS(request):
     products=Product.objects.all()
     category=Categorie.objects.all()[:1]
     CATID=request.GET.get('categories')
-    # print(CATID)
     SUBCATID=request.GET.get('sub_category')
 
-    # print(category_id)
     Header_icons = Header_Icons.objects.all()[:7]
     BRAND_ID=request.GET.get('brands')
     if CATID:
@@ -547,6 +498,7 @@ def is_valid_number(term):
     except ValueError:
         return False
 
+
 def Search(request):
     searched_query = request.GET.get('query_pass')
 
@@ -559,64 +511,46 @@ def Search(request):
     # Add conditions for each word in the search query
     for term in search_terms:
         q_objects |= (
-            Q(name__icontains=term) |
-            Q(Category__name__icontains=term) |
-            Q(Sub_category__name__icontains=term) |
-            Q(brand__Brand_name__icontains=term) |
-            Q(Tags__name__icontains=term) |
-            Q(size__name__icontains=term) |
-            Q(color__code__icontains=term) |
-            (Q(price__lte=float(term)) if is_valid_number(term) else Q()) |
-            (Q(Discount__gte=float(term)) if is_valid_number(term) else Q())
-        )
+    Q(title__icontains=term) |
+    Q(color__name__icontains=term) |  # Assuming color has a name field
+    Q(size__name__icontains=term) |   # Assuming size has a name field
+    Q(product__Category__name__icontains=term) |  # Assuming Category is a ForeignKey in Product model
+    Q(product__Sub_category__name__icontains=term) |  # Assuming Sub_category is a ForeignKey in Product model
+    Q(product__brand__Brand_name__icontains=term) |  # Assuming brand is a ForeignKey in Product model
+    Q(product__Tags__name__icontains=term) |  # Assuming Tags is a ForeignKey in Product model
+    (Q(product__price__lte=float(term)) if is_valid_number(term) else Q()) |
+    (Q(product__Discount__gte=float(term)) if is_valid_number(term) else Q())
+)
 
 
-    # Use the Q object in the filter to get relevant products
-    products = Product.objects.filter(q_objects)
+    # Use the Q object in the filter to get relevant variants
+    variants = Variants.objects.filter(q_objects).distinct()
 
-    related_categories = products.values_list('Category__name', flat=True).distinct()
-    related_subcategories = products.values_list('Sub_category__name', flat=True).distinct()
-    related_brands = products.values_list('brand__Brand_name', flat=True).distinct()
-    related_tags = products.values_list('Tags__name', flat=True).distinct()
-    related_size = products.values_list('size__name', flat=True).distinct()
-    related_colors = products.values_list('color__code', flat=True).distinct()
+    related_colors = variants.values_list('color__code', flat=True).distinct()
 
-    # print(related_brands,related_categories,related_subcategories,related_tags,related_colors,related_size)
     params = {
-        'products': products,
-        'related_categories': related_categories,
-        'related_subcategories': related_subcategories,
-        'related_brands': related_brands,
-        'related_colors':related_colors,
-        'related_size':related_size,
+        'variants': variants,
+        'related_colors': related_colors,
     }
-    
-    
-    return render(request,'../templates/Main/search.html',context=params)
+
+    return render(request, 'Main/search.html', context=params)
 
 
 
-def PRODUCT_DETAIL(request, slug):
+
+def prod_detail(request, slug,variant_id=None, color=None, size=None):
     product = get_object_or_404(Product, slug=slug)
+    variant = Variants.objects.filter(product=product).first()
+    if variant_id:
+        variant = Variants.objects.get(id=variant_id)
+    
     comments = Comment.objects.filter(product=product)
     avg_rating = comments.aggregate(avg_rating=models.Avg('numeric_rating'))['avg_rating']
     user_rating = None  # You can implement this based on user authentication
-    cart = Cart(request)
-    cart_products = [int(item) for item in cart.cart]
-
     variants = Variants.objects.filter(product=product)
     
-    selected_details = {
-    'name': product.name,
-    'color': product.color.name if product.color else '',
-    'size': product.size.name if product.size else '',
-    'price': product.price,
-    'image_url': product.image.url if product.image else '',
-    'product_image': product.product_image_set.all(),
-}
+    # Adjust this based on your logic
     
-    
-    # Fetch all variant details for each variant
     variant_details = [
         {
             'id': variant.id,
@@ -624,57 +558,148 @@ def PRODUCT_DETAIL(request, slug):
             'color_name': variant.color.name if variant.color else '',
             'size': variant.size.name if variant.size else '',
             'price': variant.price,
-            'image_url': variant.image().url if variant.image_id else '',
+            'image_url': variant.image_id.url if variant and variant.image_id else '',
         }
-        for variant in variants
     ]
+
+    product_variant = variant_details[0]
+    variant_images = Variant_image.objects.filter(variant=product_variant['id'])
+    user = request.user
+    user_cart = get_object_or_404(User_Cart, user=user)
+    cart_items = user_cart.cart_items.all()
+
+    cart_products = []
+    for item in cart_items:
+        cart_products.append({
+            'id':item.variant.id,
+            'variant_title': item.variant.title,
+            'variant_price': item.variant.price,
+            'variant_image_url': item.variant.image_id.url if item.variant.image_id else '',
+            'variant_size': item.variant.size.name if item.variant.size else '',
+            'variant_color': item.variant.color.name if item.variant.color else '',
+            'product_id': item.variant.product.id,
+            'packing_cost': item.variant.product.packing_cost,
+            'tax': item.variant.product.tax,
+            'model_name': item.variant.product.model_name,
+            'brand_name': item.variant.product.brand.Brand_name if item.variant.product.brand else '',
+            'tag_name': item.variant.product.Tags.name if item.variant.product.Tags else '',
+            'quantity': item.quantity,
+            # Add more fields as needed
+        })
+    cart_products_ids = [item['id'] for item in cart_products]
+    cart_products_ids_list = [int(id) for id in cart_products_ids]
+
     
+    # for item in cart.items.all():
+    #     cart_products.append(item.variant)
+
     context = {
         'product': product,
         'comments': comments,
         'avg_rating': avg_rating,
         'user_rating': user_rating,
         'cart_products': cart_products,
-        'variants': variants,
-        'variant_details': variant_details,
-        'selected_details': selected_details,
+        'variants': variants,  # Changed to 'variants' instead of 'variant'
+        'product_variant': product_variant,
+        'variant_images': variant_images,
+        'cart_products_ids_list':cart_products_ids_list,
     }
 
-    if variants.exists():
-        # Fetch unique colors and sizes for variant selection
-        unique_colors = variants.values_list('color__name', flat=True).distinct()
-        unique_sizes = variants.values_list('size__name', flat=True).distinct()
+    # Fetch unique colors and sizes for variant selection
+    unique_colors = variants.values_list('color__name', flat=True).distinct()
+    unique_sizes = variants.values_list('size__name', flat=True).distinct()
+    color_radio = variant.color.name
+    size_radio = variant.size.name
+    context.update({
+        'unique_colors': unique_colors,
+        'unique_sizes': unique_sizes,
+        "color_radio":color_radio,
+        "size_radio":size_radio,
+    })
+
+    if request.method == 'POST':
+        v_color = request.POST.get('color')
+        v_size = request.POST.get('size')
+        if v_color and v_size is not None:
+            color_filter = variants.filter(size__name=v_size)
+            selected_variants_or = variants.filter(Q(color__name=v_color) | Q(size__name=v_size))
+            selected_variants_and = variants.filter(Q(color__name=v_color) & Q(size__name=v_size))
+            unique_colors = []
+            for i in color_filter:
+                unique_colors.append(i.color)
+            color_radio = v_color if v_color else unique_colors[0].name if unique_colors else ''
+            size_radio = v_size if v_size else unique_sizes[0] if unique_sizes else ''
+            context.update({
+                "color_radio": color_radio,
+                "size_radio": size_radio
+            })
+        else:
+            selected_variants_and = Variants.objects.filter(product=product)
+            size_radio = unique_sizes[0] if unique_sizes else ''
+            color_radio = unique_colors[0] if unique_colors else ''
+
+
+            context.update({
+                "color_radio": color_radio,
+                "size_radio": size_radio
+            })
+
+        if selected_variants_and.exists():
+            selected_variant = selected_variants_and.first()
+        else:
+            selected_variant = selected_variants_or.first()
+
+        variant_details = {
+            'id': selected_variant.id if selected_variant else None,
+            'name': selected_variant.title if selected_variant else '',
+            'color': selected_variant.color.name if selected_variant and selected_variant.color else '',
+            'size': selected_variant.size.name if selected_variant and selected_variant.size else '',
+            'price': selected_variant.price if selected_variant else 0,
+            'image_url': selected_variant.image_id.url if selected_variant and selected_variant.image_id else '',
+        }
+        variant_images = Variant_image.objects.filter(variant=variant_details['id'])
+        product_variant = variant_details
         context.update({
+            'product_variant': product_variant,
+            "variant_images": variant_images,
             'unique_colors': unique_colors,
-            'unique_sizes': unique_sizes,
         })
+    main_category, category, Sub_category = categories_function(request)
 
-    if request.method == 'GET':
-        v_color = request.GET.get('color')
-        v_size = request.GET.get('size')
-        selected_variants = variants.filter(Q(color__name=v_color) | Q(size__name=v_size))
-
-        if selected_variants.exists():
-                selected_variant = selected_variants.first()  # You might need to adjust this based on your logic
-                
-                # Extract specific details for the selected variant
-                selected_details = {
-                    'id':selected_variant.id,
-                    'name': selected_variant.title,
-                    'color': selected_variant.color.name if selected_variant.color else '',
-                    'size': selected_variant.size.name if selected_variant.size else '',
-                    'price': selected_variant.price,
-                    'image_url': selected_variant.image().url if selected_variant.image_id else '',
-                }
-
-                # Include the selected details in the context
-                context.update({'selected_details': selected_details})
-
+    context.update({
+        "main_category":main_category,
+        "category":category,
+        "Sub_category":Sub_category
+    })
     scroll_position = request.GET.get('scroll_position', 0)
+    context['scroll_position'] = scroll_position
+    return render(request, 'Main/product_detail.html', context=context)
 
-    # Include the scroll position in the context
-    context['scroll_position'] = scroll_position   
-    return render(request, 'Main/product_detail.html', context)
+
+
+
+def update_colors(request):
+    size = request.GET.get('size')
+    # Your logic to get colors based on the selected size
+    colors = Color.objects.filter(variant__size=size).distinct()
+    colors_html = ''.join([f'<label>{color.name}<input type="radio" name="color" value="{color.name}"></label>' for color in colors])
+    return JsonResponse({'colors_html': colors_html})
+
+def update_variants(request):
+    size = request.GET.get('size')
+    color = request.GET.get('color')
+    # Your logic to get variants based on the selected size and color
+    variants = Variants.objects.filter(size=size, color__name=color)
+    variants_html = ''.join([f'<div>{variant.name}</div>' for variant in variants])
+    return JsonResponse({'variants_html': variants_html})
+
+
+def get_colors(request):
+    size = request.GET.get('size')
+    # Query your database to get colors based on the selected size
+    colors = Variants.objects.filter(size__name=size).values('color__id', 'color__name')
+    return JsonResponse({'colors': list(colors)})
+
 
 def get_variant_details(request):
     if request.method == 'GET':

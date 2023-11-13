@@ -1,5 +1,6 @@
 from Ecommerceapp import views
 from django.urls import path
+from CART.views import *
 
 urlpatterns = [
     #Home
@@ -10,10 +11,15 @@ urlpatterns = [
     path('products/', views.PRODUCTS, name="products"),
     path('cats/', views.CATS, name="cats"),
     path('sub_cats/', views.SUBCATS, name='SUBCATS'),
-    path('product/<slug:slug>',views.PRODUCT_DETAIL,name='product_detail'),
+    # path('product/<slug>/', views.PRODUCT_DETAIL, name='product_detail'),
+    # path('update_colors/', views.update_colors, name='update_colors'),
+    # path('update_variants/', views.update_variants, name='update_variants'),
+    path('product/<slug:slug>',views.prod_detail,name='product_detail'),
+    path('product_detail/<slug:slug>&<int:variant_id>', views.prod_detail, name='product_detail'),
     path('get_variant_details/', views.get_variant_details, name='get_variant_details'),
     path('rate_product/<slug:slug>/', views.rate_product, name='rate_product'),
     path('add_comment/<slug:slug>/', views.add_comment, name='add_comment'),
+    path('get_colors/', views.get_colors, name='get_colors'),
 
 
     #Contact
@@ -34,7 +40,6 @@ urlpatterns = [
     path('cart/add/<slug:slug>/', views.cart_add, name='cart_add'),
     path('cart/add_home/<slug:slug>/', views.cart_add_home, name='cart_add_home'),
     path('cart/add_shop/<slug:slug>/', views.cart_add_shop, name='cart_add_shop'),
-    path('add_to_cart/', views.add_to_cart, name='add_to_cart'),
     path('cart/item_clear/<int:id>/', views.item_clear, name='item_clear'),
     path('cart/item_increment/<int:id>/',
          views.item_increment, name='item_increment'),

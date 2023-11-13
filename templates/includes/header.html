@@ -29,7 +29,7 @@
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4">
                         <div class="header__info">
                             <div class="logo">
-                                <a href="/" class="logo-image"><h1 style="color: white;">VStore.in</h1></a>
+                                <a href="/" class="logo-image"><h1 style="color: white;">Q</h1></a>
                             </div>
                         </div>
                     </div>
@@ -53,48 +53,7 @@
                                     <span class="count count-2">{{request.session.cart|length}}</span>
 
                                     </a>
-                                <div class="cart">
-                                    <div class="cart__mini">
-                                        <ul>
-                                            <li>
-                                              <div class="cart__title">
-                                                <h4>Your Cart</h4>
-                                                <span>(1 Item in Cart)</span>
-                                              </div>
-                                            </li>
-                                            <li>
-                                              <div class="cart__item d-flex justify-content-between align-items-center">
-                                                <div class="cart__inner d-flex">
-                                                  <div class="cart__thumb">
-                                                    <a href="#">
-                                                      <img src="assets/img/cart/20.jpg" alt="">
-                                                    </a>
-                                                  </div>
-                                                  <div class="cart__details">
-                                                    <h6><a href="#"> Samsung C49J89: £875, Debenhams Plus  </a></h6>
-                                                    <div class="cart__price">
-                                                      <span>$255.00</span>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                <div class="cart__del">
-                                                    <a href="#"><i class="fal fa-times"></i></a>
-                                                </div>
-                                              </div>
-                                            </li>
-                                            <li>
-                                              <div class="cart__sub d-flex justify-content-between align-items-center">
-                                                <h6>Subtotal</h6>
-                                                <span class="cart__sub-total">$255.00</span>
-                                              </div>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="wc-cart mb-10">View cart</a>
-                                                <a href="#" class="wc-checkout">Checkout</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                
                             </div>
                             {% if user.is_authenticated %}
 
@@ -142,7 +101,7 @@
                                 <!-- <nav id="mobile-menu" class="expander-content" style="display: block;"> -->
                                     <ul>
                                         <li>
-                                            <a href="/sub_cats/?categories=">All Categories <i class="far fa-angle-down"></i></a>
+                                            <a style="pointer-events: none;">All Categories <i class="far fa-angle-down"></i></a>
                                             <ul class="mega-menu">
                                                 {% for i in main_category %}
                                                 <li><a href="/sub_cats/?categories={{i.id}}">{{i.name}}</a>

@@ -1,4 +1,5 @@
 {% load static %}
+{% load product_tags %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
@@ -76,12 +77,61 @@
             padding: 5px;
         }
 
-        button {
+        .A {
             padding: 8px;
             background-color: #4caf50;
             color: white;
             cursor: pointer;
         }
+        .product__details-nav-thumb {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .magnify {
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        display: none;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        background: #fff;
+        background-size: 100% 100%;
+        z-index: 2;
+    }
+
+    .product__details-nav-thumb:hover .magnify {
+        display: block;
+    }
+    #sizeRadioGroup {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 10px;
+    }
+
+    .size-box {
+        cursor: pointer;
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ccc;
+        {% if size_radio == size %} box-shadow: blue 2px 3px 4px; {% endif %} /* Add box-shadow style */
+    }
+
+    #colorRadioGroup {
+        display: flex;
+        gap: 10px;
+    }
+
+    .color-box {
+        cursor: pointer;
+        padding: 10px;
+        text-align: center;
+        background-color: white;
+        -webkit-text-stroke: 0.25px black;
+        color: white;
+        text-shadow: black 1px 2px 3px;
+        {% if color_radio == color.name %} box-shadow: yellow 1px 0px 0px; {% endif %} /* Add box-shadow style */
+    }
         
     </style>
    </head>
@@ -217,50 +267,70 @@
         <!-- breadcrumb__area-end -->
 
         <!-- product-details-start -->
+        
         <div class="product-details">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-6">
                         <div class="product__details-nav d-sm-flex align-items-start">
-                            <ul class="nav nav-tabs flex-sm-column justify-content-between" id="productThumbTab" role="tablist">
-                                {% for i in selected_details.product_image %}
+
+                            <div class="product__details-thumb" style="display: flex; width: 100%;justify-content: space-between;">
+                                <!-- Thumbnails navigation -->
+                                <ul class="nav nav-tabs flex-column" id="productThumbTab" role="tablist" style="flex-shrink: 0;margin: 0.5rem;">
+                                    <!-- Main product image tab -->
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="thumb{{i.id}}-tab" data-bs-toggle="tab" data-bs-target="#thumb{{i.id}}" type="button" role="tab" aria-controls="thumb{{i.id}}" aria-selected="true">
-                                            <img src="{{i.image.url}}" class="img-fluid" style="height: auto; width: 2rem;" alt="">
-                                        </button>
+                                        <a class="nav-link active" id="thumbMain-tab" data-bs-toggle="tab" href="#thumbMain" role="tab" aria-controls="thumbMain" aria-selected="true">
+                                            <img src="{{ product_variant.image_url }}" class="img-fluid" style="height: auto; width: 3rem;" alt="Main Product Image">
+                                        </a>
                                     </li>
-                                {% endfor %}
-                            </ul>
-                        
-                            <div class="product__details-thumb">
-                                <div class="tab-content" id="productThumbContent">
-                                    <div class="tab-pane fade show active" id="thumbOne" style="padding:10%;" role="tabpanel" aria-labelledby="thumbOne-tab">
-                                        <div class="product__details-nav-thumb w-img">
-                                            <img src="{{ selected_details.image_url }}" alt="Product Image" class="img-fluid" style="width: 100%; height: auto;">
-                                        </div>
+                            
+                                    <!-- Variant image tabs -->
+                                    {% for variant_image in variant_images %}
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link" id="thumb{{ variant_image.id }}-tab" data-bs-toggle="tab" href="#thumb{{ variant_image.id }}" role="tab" aria-controls="thumb{{ variant_image.id }}" aria-selected="true">
+                                                <img src="{{ variant_image.image.url }}" class="img-fluid" style="height: auto; width: 3rem;" alt="Variant Image">
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            
+                                <!-- Main product image and Variant images content -->
+                                <div class="tab-content" style="flex-grow: 2;width: 100%;background-color: #16bcdc;">
+                                    <!-- Main product image -->
+                                    <div class="tab-pane fade show active product__details-nav-thumb" style="width: 100%;" id="thumbMain" role="tabpanel" aria-labelledby="thumbMain-tab">
+                                        <img src="{{ product_variant.image_url }}" class="img-fluid main-image" style="width: 100%;" alt="Main Product Image">
+                                        <!-- <div class="magnify"></div> -->
                                     </div>
-                        
-                                    {% for i in selected_details.product_image_set.all %}
-                                        <div class="tab-pane fade show" id="thumb{{i.id}}" style="padding: 10%;" role="tabpanel" aria-labelledby="thumb{{i.id}}-tab">
-                                            <div class="product__details-nav-thumb w-img">
-                                                <img src="{{i.image_url}}" class="img-fluid" style="width: 100%; height: auto;" alt="">
-                                            </div>
+                            
+                                    <!-- Variant images -->
+                                    {% for variant_image in variant_images %}
+                                        <div class="tab-pane fade product__details-nav-thumb" id="thumb{{ variant_image.id }}" role="tabpanel" aria-labelledby="thumb{{ variant_image.id }}-tab">
+                                            <img src="{{ variant_image.image.url }}" class="img-fluid" style="width: 100%;" alt="Variant Image">
                                         </div>
                                     {% endfor %}
                                 </div>
-                            </div>
-                        </div>
-                        
+                            
+                                <!-- Other product images -->
+                                {% for i in product.product_image_set.all %}
+                                    <div class="tab-pane fade product__details-nav-thumb" id="thumb{{i.id}}" style="width: 0%;" role="tabpanel" aria-labelledby="thumb{{i.id}}-tab">
+                                        <img src="{{i.image.url}}" class="img-fluid"  alt="Product Image">
+                                    </div>
+                                {% endfor %}
+                            </div> 
+                        </div> 
                     </div>
                     <div class="col-xl-6">
                         <div class="product__details-content">
-                            <h6>{{selected_details.name}}</h6>
+                           
+                            <h6>{{product_variant.name}}</h6>
                             <div style="display: flex;">
                                 
                                 <h5 id="averageRating_P">{{avg_rating}}</h5><span style="margin-left: 1rem;">{{avg_rating}}</span>
                             </div>
                             <div class="price">
-                                <span>&#8377 {{ selected_details.price }}</span>
+                                <span>&#8377
+                                        {% calculate_pricetag product_variant.price product.Discount %}
+                                </span>
                             </div>
                             <div class="features-des mb-20 mt-10">
                                 <ul>
@@ -269,50 +339,83 @@
                                 </ul>
                             </div>
                             <hr>
-                            <div>
-                                <form method="get" action="{% url 'product_detail' product.slug %}">
+                            <div style="margin: 1rem 0rem;">
+                                <form method="post" action="{% url 'product_detail' product.slug %}" id="productForm">
                                     {% csrf_token %}
                                     
-                                    <!-- Color selection -->
-                                    {% if unique_colors %}
-                                        <div id="colorRadioGroup">
-                                            {% for color in unique_colors %}
-                                                <label>
-                                                    <input type="radio" name="color" value="{{ color }}" data-color="{{ color }}" onchange="this.form.submit();">
-                                                    {{ color }}
-                                                </label>
-                                            {% endfor %}
-                                        </div>
-                                    {% endif %}
-                                
                                     <!-- Size selection -->
+                                    <div style="display: flex; text-align: center; align-items: center;">
+                                        <h5>Size:</h5>&nbsp;<h5>{{ size_radio }}</h5>
+                                    </div>
                                     {% if unique_sizes %}
                                         <div id="sizeRadioGroup">
                                             {% for size in unique_sizes %}
-                                                <label>
-                                                    <input type="radio" style="color:red;" name="size" value="{{ size }}" data-size="{{ size }}" onchange="this.form.submit();">
+                                                <p class="size-box" style="box-shadow: {% if size_radio == size %}grey 0.3px 2px 2px ; border: 1px solid #16bcdc{% endif %}" onclick="selectSize('{{ size }}')">
                                                     {{ size }}
-                                                </label>
+                                                </p>
                                             {% endfor %}
                                         </div>
                                     {% endif %}
+                                    <input type="hidden" name="size" value="{{ size_radio }}" id="selectedSize">
+                                
+                                    <hr>
+                                
+                                    <!-- Color selection -->
+                                    <div style="display: flex; text-align: center; align-items: center;">
+                                        <h5>Color:</h5>&nbsp;<h5>{{ color_radio }}</h5>
+                                    </div>
+                                    {% if unique_colors %}
+
+                                    <div id="colorRadioGroup">
+                                        {% for color in unique_colors %}
+                                            <div class="color-box" style="background-color: {{ color.code }}; {% if color_radio == color.name %}box-shadow:grey 1px 3px 3px; border: 1px solid #16bcdc{% endif %}" onclick="selectColor('{{ color.name }}')">
+                                                {{ color.name }}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    {% endif %}
+                                    <input type="hidden" name="color" value="{{ color_radio }}" id="selectedColor">
                                 </form>
                                 
+                                <script>
+                                    function selectSize(size) {
+                                        document.getElementById('selectedSize').value = size;
+                                        document.getElementById('productForm').submit();
+                                    }
+                                
+                                    function selectColor(color) {
+                                        document.getElementById('selectedColor').value = color;
+                                        document.getElementById('productForm').submit();
+                                    }
+                                </script>
                             </div>
+                            
+                            
                             <div class="product-stock mb-20">
                                 <h5>Availability: <span> {{product.Availability}} in stock</span></h5>
                             </div>
                             <div class="cart-option mb-15">
-                                {% if product.id in cart_products %}
-                                    <a href="/cart/cart-detail/" type="button" class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100 added">
-                                        Added
-                                    </a>
-                                {% else %}
-                                <a data-product-id="{{ product.id }}" href="{% url 'cart_add' product.slug %}" type="button" class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100">
-                                    Add to Cart
-                                </a>
                                 
-                                {% endif %}
+                                    {% if product_variant.id|add:0 in cart_products_ids_list %}
+                                        <a href="{% url 'add_to_cart' product_variant.id %}" type="button"
+                                           class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100 added">
+                                            Added
+                                        </a>
+                                        <a type="button" href="#" onclick="decrementCartItem('{{ product_variant.id }}')"
+   class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100">
+   Remove
+</a>
+
+
+                                    {% else %}
+                                        <a type="button" class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100"
+                                           onclick="addToCart({{product_variant.id}})">
+                                            Add to Cart
+                                        </a>
+                                    {% endif %}
+
+
+
                             </div>
                             <div class="details-meta">
                                 <div class="d-meta-left">
@@ -362,7 +465,7 @@
                                     <button class="nav-link" id="aditional-tab" data-bs-toggle="tab" data-bs-target="#aditional" type="button" role="tab" aria-controls="aditional" aria-selected="false">Additional information</button>
                                   </li>
                                 <li class="nav-item" role="presentation">
-                                  <button class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review" type="button" role="tab" aria-controls="review" aria-selected="false">Reviews (1) </button>
+                                  <button class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review" type="button" role="tab" aria-controls="review" aria-selected="false">{{ comments|length }} Reviews  </button>
                                 </li>
                               </ul>
                         </div>
@@ -402,7 +505,7 @@
                                 </div>
                                 <div class="col-xl-8">
                                     <div class="review-des-infod">
-                                        <h6>Reviews for&nbsp;"<span>{{product.name}}</span>"</h6>
+                                        <h6>{{ comments|length }} Reviews for&nbsp;"<span>{{product.name}}</span>"</h6>
                                         {% for comment in comments %}
                                         <div class="review-details-des">
                                             <div class="author-image mr-15">
@@ -465,7 +568,7 @@
                                                 
                                                 <input type="hidden" name="star-rating" id="starsRatingInput" value="0">
                                                 <input type="file" name="image" accept="image/*" />
-                                                <button type="button" onclick="submitCommentForm()">Submit</button>
+                                                <button type="button" class="A" onclick="submitCommentForm()">Submit</button>
                                             </div>
                                             
                                               </div>
@@ -510,6 +613,181 @@
       <script src="{% static 'assets/js/ajax-form.js' %}"></script>
       <script src="{% static 'assets/js/main.js' %}"></script>
 <!-- Include jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    function addToCart(product_variant_id) {
+            console.log("Hello")
+            $.ajax({
+                type: "GET",
+                url: "{% url 'add_to_cart' 0 %}".replace('0', product_variant_id),
+                beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                },
+                success: function (data) {
+                    // document.getElementsByClassName('added').
+                    // button.text("Added").attr("disabled", true);
+                    window.location.reload();
+                    console.log("Item added to cart successfully");
+                    // You can update the UI or perform other actions here
+                },
+                error: function (error) {
+                    console.error("Error adding item to cart");
+                }
+            });
+        }
+
+        function decrementCartItem(productVariantId) {
+        $.ajax({
+            type: "GET",
+            url: "{% url 'decrement_cart_item' 0 %}".replace('0', productVariantId),
+            beforeSend: function (xhr, settings) {
+                xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            },
+            success: function (data) {
+                // Update the UI based on the response
+                if (data.status === 'success') {
+                    // You can update the UI or perform other actions here
+                    // For example, you can update the quantity display on the page
+                    // or remove the corresponding item from the cart view.
+                    console.log("Item removed from cart successfully");
+                } else {
+                    console.error('Failed to remove item from cart');
+                }
+            },
+            error: function (error) {
+                console.error('Error removing item from cart');
+            }
+        });
+    }
+function clearCart() {
+    $.ajax({
+        type: 'GET',
+        url: '{% url "clear_cart" %}',
+        beforeSend: function (xhr, settings) {
+            xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
+        },
+        success: function (data) {
+            // Update the UI to reflect an empty cart, e.g., remove items from the display
+            console.log('Cart cleared successfully');
+        },
+        error: function (error) {
+            console.error('Error clearing cart');
+        }
+    });
+}
+
+</script>
+
+<!-- <script>
+    document.getElementById('add-to-cart-btn').addEventListener('click', function(event) {
+        event.preventDefault();
+
+        // Cache the button element for easy reference
+        const addButton = this;
+
+        // Make an AJAX request to the 'add_to_cart' URL
+        fetch(this.getAttribute('href'), {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Response data:', data);
+
+            // Check if the status is 'success'
+            if (data.status === 'success') {
+                // Update the button text and disable further clicks
+                addButton.textContent = 'Added to Cart';
+                addButton.classList.add('added-to-cart'); // Add a CSS class for styling
+                addButton.removeEventListener('click', handleButtonClick); // Disable further clicks
+            } else {
+                // Handle the case where the variant was not added to the cart
+                console.error('Failed to add variant to cart');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+        // Define a function to handle button clicks (can be reused)
+        function handleButtonClick(event) {
+            event.preventDefault();
+            // Add any additional handling for button clicks here
+        }
+    });
+</script> -->
+
+
+
+<!-- <script>
+    document.getElementById('add-to-cart-btn').addEventListener('click', function(event) {
+        event.preventDefault();
+
+        // Make an AJAX request to the 'add_to_cart' URL
+        fetch(this.getAttribute('href'), {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Check if the variant was successfully added to the cart
+            if (data.success) {
+                // Update the button text or style
+                this.textContent = 'Added to Cart';
+                this.classList.add('added-to-cart'); // Add a CSS class for styling
+
+                // Optionally, you can redirect the user to the cart page or show a success message
+                // window.location.href = '/cart/';
+                // alert('Variant added to cart successfully!');
+            } else {
+                // Handle the case where the variant was not added to the cart
+                console.error('Failed to add variant to cart');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script> -->
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var mainImageContainer = document.getElementById("thumbMain");
+        var magnifyContainer = mainImageContainer.querySelector(".magnify");
+
+        mainImageContainer.addEventListener("mousemove", function (e) {
+            var rect = mainImageContainer.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
+
+            magnifyContainer.style.backgroundImage = 'url("' + '{{ product_variant.image_url }}' + '")';
+            magnifyContainer.style.backgroundPosition = '-' + x * 2 + 'px -' + y * 2 + 'px';
+        });
+    });
+</script>
+
+<script>
+
+
+    function resetColorSelection() {
+        // Reset the selected color
+        var colorRadios = document.getElementsByName('color');
+        for (var i = 0; i < colorRadios.length; i++) {
+            colorRadios[i].checked = false;
+        }
+
+        // Submit the form to update the variants
+        document.getElementById('productForm').submit();
+    }
+</script>
 
 
 <script>
@@ -659,12 +937,12 @@ function submitCommentForm() {
 }
 
 </script>
-<script>
-    function addToCart(productId) {
+<!-- <script>
+    function addToCart(productI) {
             console.log("Hello")
             $.ajax({
                 type: "GET",
-                url: "{% url 'cart_add' 0 %}".replace('0', productId),
+                url: "{% url 'cart_add' 0 %}".replace('0', productI),
                 beforeSend: function (xhr, settings) {
                     xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
                 },
@@ -679,6 +957,6 @@ function submitCommentForm() {
                 }
             });
         }
-</script>
+</script> -->
    </body>
 </html>

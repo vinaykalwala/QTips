@@ -11,6 +11,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('logout/',views.logout_req,name="logout" ),
+    path('',include('CART.urls')),
     path('',include('Ecommerceapp.urls')),
     path('auth/',include('Authenticationapp.urls')),
 ]

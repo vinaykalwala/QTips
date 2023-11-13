@@ -2,7 +2,10 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.utils.html import format_html
 from .models import *
+from django import forms
 import admin_thumbnails
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 class OrderItemInline(admin.TabularInline):
     model = Order_item
@@ -18,21 +21,17 @@ class ProductImageInline(admin.TabularInline):
 class AdditionalInfoInline(admin.TabularInline):
     model = Additional_info
 
+
+class VariantImageInline(admin.TabularInline):
+    model = Variant_image
+    extra = 3
+    show_change_link = True
 class VariantsInline(admin.TabularInline):
     model = Variants
-    readonly_fields = ['image_tag'] # Make sure to include the readonly field for image_tag
-    def image_tag(self, obj):
-        if obj.image_id:
-            img = Product_image.objects.get(id=obj.image_id)
-            return format_html('<img src="{}" height="60" />', img.image.url)
-        return None
-
-    readonly_fields = ('image_tag',)
-
+    readonly_fields = ('display_image',)
+    
     extra = 1
     show_change_link = True
-
-
 class ProductsAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline, VariantsInline, AdditionalInfoInline]
     list_display = ('name','display_image', 'price', 'Category', 'Sub_category', 'Section')
@@ -65,8 +64,18 @@ class SizeAdmin(admin.ModelAdmin):
     list_display = ['name', 'code']
 
 class VariantsAdmin(admin.ModelAdmin):
-     list_display = ['title', 'product', 'color_name', 'size', 'price', 'quantity', 'image_tag']
+    inlines = [VariantImageInline]
+    list_filter = ['product'] 
+    list_display = ['title', 'product', 'color_name', 'size', 'price', 'quantity','display_image']
+    search_fields = ['title','product__name', 'color__name', 'size__name'] 
+    def display_image(self, obj):
+       return format_html('<img src="{}" width="50" height="50" />', obj.image_id.url)
+    display_image.short_description = 'Image'
 # Partners
+class VariantImageInlineFormSet(forms.models.BaseInlineFormSet):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.queryset = Variant_image.objects.none()
 admin.site.register(Partners)
 
 # Register your models here.
@@ -79,6 +88,8 @@ admin.site.register(Tag)
 admin.site.register(Brands)
 admin.site.register(Sliders)
 admin.site.register(Header_Icons)
+
+admin.site.register(Variant_image)
 admin.site.register(Banners)
 
 # CATEGORIES
@@ -99,5 +110,3 @@ admin.site.register(Color, ColorAdmin)
 admin.site.register(Coupon)
 
 # CART
-admin.site.register(Cart)
-admin.site.register(CartItem)

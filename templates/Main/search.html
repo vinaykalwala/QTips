@@ -16,8 +16,8 @@
     <!-- CSS here -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="{% static 'path/to/jquery-3.6.4.min.js' %}"></script>
-<script src="{% static 'path/to/jquery-ui.min.js' %}"></script>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{% static 'path/to/jquery-ui.min.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
     <link rel="stylesheet" href="{% static 'assets/css/preloader.css' %}">
@@ -36,129 +36,145 @@
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <style>
         /* Import Google Font - Poppins */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
-.wrapper {
-  width: 400px;
-  background: #fff;
-  border-radius: 10px;
-  padding: 20px 25px 40px;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
-}
-header h2 {
-  font-size: 24px;
-  font-weight: 600;
-}
-header p {
-  margin-top: 5px;
-  font-size: 16px;
-}
-.price-input {
-  width: 100%;
-  display: flex;
-  margin: 30px 0 35px;
-}
-.price-input .field {
-  display: flex;
-  width: 100%;
-  height: 45px;
-  align-items: center;
-}
-.field input {
-  width: 100%;
-  height: 100%;
-  outline: none;
-  font-size: 19px;
-  margin-left: 12px;
-  border-radius: 5px;
-  text-align: center;
-  border: 1px solid #999;
-  -moz-appearance: textfield;
-}
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-}
-.price-input .separator {
-  width: 130px;
-  display: flex;
-  font-size: 19px;
-  align-items: center;
-  justify-content: center;
-}
-.slider {
-  height: 5px;
-  position: relative;
-  background: #ddd;
-  border-radius: 5px;
-}
-.slider .progress {
-  height: 100%;
-  left: 25%;
-  right: 25%;
-  position: absolute;
-  border-radius: 5px;
-  background: #17a2b8;
-}
-.range-input {
-  position: relative;
-}
-.range-input input {
-  position: absolute;
-  width: 100%;
-  height: 5px;
-  top: -5px;
-  background: none;
-  pointer-events: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-input[type="range"]::-webkit-slider-thumb {
-  height: 17px;
-  width: 17px;
-  border-radius: 50%;
-  background: #17a2b8;
-  pointer-events: auto;
-  -webkit-appearance: none;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
-}
-input[type="range"]::-moz-range-thumb {
-  height: 17px;
-  width: 17px;
-  border: none;
-  border-radius: 50%;
-  background: #17a2b8;
-  pointer-events: auto;
-  -moz-appearance: none;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
-}
+        .wrapper {
+            width: 400px;
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px 25px 40px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+        }
 
-/* Support */
-.support-box {
-  top: 2rem;
-  position: relative;
-  bottom: 0;
-  text-align: center;
-  display: block;
-}
-.b-btn {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-.b-btn.paypal i {
-  color: blue;
-}
-.b-btn:hover {
-  text-decoration: none;
-  font-weight: bold;
-}
-.b-btn i {
-  font-size: 20px;
-  color: yellow;
-  margin-top: 2rem;
-}
+        header h2 {
+            font-size: 24px;
+            font-weight: 600;
+        }
 
+        header p {
+            margin-top: 5px;
+            font-size: 16px;
+        }
+
+        .price-input {
+            width: 100%;
+            display: flex;
+            margin: 30px 0 35px;
+        }
+
+        .price-input .field {
+            display: flex;
+            width: 100%;
+            height: 45px;
+            align-items: center;
+        }
+
+        .field input {
+            width: 100%;
+            height: 100%;
+            outline: none;
+            font-size: 19px;
+            margin-left: 12px;
+            border-radius: 5px;
+            text-align: center;
+            border: 1px solid #999;
+            -moz-appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+
+        .price-input .separator {
+            width: 130px;
+            display: flex;
+            font-size: 19px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider {
+            height: 5px;
+            position: relative;
+            background: #ddd;
+            border-radius: 5px;
+        }
+
+        .slider .progress {
+            height: 100%;
+            left: 25%;
+            right: 25%;
+            position: absolute;
+            border-radius: 5px;
+            background: #17a2b8;
+        }
+
+        .range-input {
+            position: relative;
+        }
+
+        .range-input input {
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            top: -5px;
+            background: none;
+            pointer-events: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            height: 17px;
+            width: 17px;
+            border-radius: 50%;
+            background: #17a2b8;
+            pointer-events: auto;
+            -webkit-appearance: none;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            height: 17px;
+            width: 17px;
+            border: none;
+            border-radius: 50%;
+            background: #17a2b8;
+            pointer-events: auto;
+            -moz-appearance: none;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Support */
+        .support-box {
+            top: 2rem;
+            position: relative;
+            bottom: 0;
+            text-align: center;
+            display: block;
+        }
+
+        .b-btn {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .b-btn.paypal i {
+            color: blue;
+        }
+
+        .b-btn:hover {
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .b-btn i {
+            font-size: 20px;
+            color: yellow;
+            margin-top: 2rem;
+        }
     </style>
 </head>
 
@@ -174,198 +190,7 @@ input[type="range"]::-moz-range-thumb {
     <!-- back to top end -->
 
     <!-- header-start -->
-    <header class="header d-blue-bg">
-        <div class="header-top">
-            <div class="container 0">
-                <div class="header-inner">
-                    <div class="row align-items-center">
-                        <div class="col-xl-6 col-lg-7">
-                            <div class="header-inner-start">
-
-                                <div class="support d-none d-sm-block">
-                                    <p>Need Help? <a href="tel:+91 9912643756">+91 9912643756</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-5 d-none d-lg-block">
-                            <div class="header-inner-end text-md-end">
-                                <div class="ovic-menu-wrapper ovic-menu-wrapper-2">
-                                    <ul>
-                                        <li><a href="/about/">About Us</a></li>
-                                        <li><a href="contact.html">Order Tracking</a></li>
-                                        <li><a href="/contact/">Contact Us</a></li>
-                                        <li><a href="faq.html">FAQs</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="header-mid">
-            <div class="container">
-                <div class="heade-mid-inner">
-                    <div class="row align-items-center">
-                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4">
-                            <div class="header__info header__info-2">
-                                <div class="logo logo-3">
-                                    <a href="/" class="logo-image">
-                                        <h1 style="color: white;">VStore.in</h1>
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-xl-5 col-lg-4 d-none d-lg-block">
-                            <div class="header__search">
-                                <form role="search" method="get" action="/search/">
-                                    <div class="header__search-box">
-                                        <input class="search-input" type="text" placeholder="I'm shopping for..." style="padding: 20px;" name="query_pass" id="query_pass">
-                                        <button class="button" type="submit"><i class="far fa-search"></i></button>
-                                    </div>
-                                    
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-5 col-md-8 col-sm-8">
-                            <div class="header-action" style="display:flex;justify-content:space-around">
-
-                                <div class="block-cart action side-menu-btn offcanvas-toggle-btn">
-                                    <a class="icon-link icon-link-2">
-                                        <i class="flaticon-shopping-bag "></i>
-                                        <span class="count count-2">{{request.session.cart|length}}</span>
-
-                                    </a>
-                                    <div class="cart">
-                                        <div class="cart__mini">
-                                            <ul>
-                                                <li>
-                                                    <div class="cart__title">
-                                                        <h4>Your Cart</h4>
-                                                        <span>(1 Item in Cart)</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div
-                                                        class="cart__item d-flex justify-content-between align-items-center">
-                                                        <div class="cart__inner d-flex">
-                                                            <div class="cart__thumb">
-                                                                <a href="product-details.html">
-                                                                    <!-- <img src="assets/img/cart/20.jpg" alt=""> -->
-                                                                </a>
-                                                            </div>
-                                                            <div class="cart__details">
-                                                                <h6><a href="product-details.html"> Samsung C49J89:
-                                                                        £875, Debenhams Plus </a></h6>
-                                                                <div class="cart__price">
-                                                                    <span>$255.00</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="cart__del">
-                                                            <a href="#"><i class="fal fa-times"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div
-                                                        class="cart__sub d-flex justify-content-between align-items-center">
-                                                        <h6>Subtotal</h6>
-                                                        <span class="cart__sub-total">$255.00</span>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <a href="/cart/cart-detail/" class="wc-cart mb-10">View cart</a>
-                                                    <a href="checkout.html" class="wc-checkout">Checkout</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% if user.is_authenticated %}
-
-                                <div class="block-userlink">
-                                    <a class="icon-link" href="{% url 'my_account' %}">
-                                        <i class="flaticon-user"></i>
-                                        <span class="text">
-                                            <span class="sub">{{user.username}} </span>
-                                            My Account </span>
-                                    </a>
-                                </div>
-
-                                {% else %}
-                                <div class="block-userlink">
-                                    <a class="icon-link" href="{% url 'my_account' %}">
-                                        <i class="flaticon-user"></i>
-                                        <span class="text">
-                                            <span class="sub">Login </span>
-                                            My Account </span>
-                                    </a>
-                                </div>
-                                {% endif %}
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="header__bottom d-none d-lg-block">
-            <div class="container">
-                <div class="box-items-inner pt-10 pb-10">
-                    <div class="box-item">
-                        <a href="/products/?categories=4">
-                            <i class="fal fa-desktop"></i>
-                            Laptop <br> & Computer
-                        </a>
-                    </div>
-                    <div class="box-item">
-                        <a href="/products/?categories=1">
-                            <i class="fal fa-mobile"></i>
-                            Tablets <br> & Mobile Phones
-                        </a>
-                    </div>
-                    <div class="box-item">
-                        <a href="shop.html">
-                            <i class="fal fa-router"></i>
-                            Digitals <br> & Electronics
-                        </a>
-                    </div>
-                    <div class="box-item">
-                        <a href="shop.html">
-                            <i class="fal fa-webcam"></i>
-                            Camera <br> & Accesories
-                        </a>
-                    </div>
-                    <div class="box-item">
-                        <a href="shop.html">
-                            <i class="fal fa-bed-alt"></i>
-                            Decor <br> & Furniture
-                        </a>
-                    </div>
-                    <div class="box-item">
-                        <a href="shop.html">
-                            <i class="fal fa-tshirt"></i>
-                            Fashion <br> & Clotheing
-                        </a>
-                    </div>
-                    <div class="box-item d-lg-none">
-                        <a href="shop.html">
-                            <i class="fal fa-hat-chef"></i>
-                            Garden <br> & Home Kitchen
-                        </a>
-                    </div>
-                    <div class="box-item d-lg-none d-xl-block">
-                        <a href="shop.html">
-                            <i class="fal fa-speaker"></i>
-                            Audio <br> & Headphones
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+    {% include "includes/header.html" %}
     <!-- header-end -->
 
     <!-- offcanvas area start -->
@@ -451,7 +276,7 @@ input[type="range"]::-moz-range-thumb {
                     <div class="col-xl-3 col-lg-4">
                         <form id="filterForm" method="post" action="{% url 'products' %}" class="s-form mt-20">
                             {% csrf_token %}
-                    
+
                             <div class="product-widget mb-30">
                                 <h5 class="pt-title">Filter By Price</h5>
                                 <div class="price__slider mt-30">
@@ -462,49 +287,55 @@ input[type="range"]::-moz-range-thumb {
                                     <input type="text" id="max_price" hidden name="max_price" placeholder="Max Price">
                                 </div>
                                 <div class="wrappers">
-                                  
+
                                     <div class="price-input">
-                                      <div class="field">
-                                        <span>Min</span>
-                                        <input type="number" style="font-size: small;" class="input-min" value="50000">
-                                      </div>
-                                      <div class="separator">-</div>
-                                      <div class="field">
-                                        <span>Max</span>
-                                        <input type="number" style="font-size: small;" class="input-max" value="75000">
-                                      </div>
+                                        <div class="field">
+                                            <span>Min</span>
+                                            <input type="number" style="font-size: small;" class="input-min"
+                                                value="50000">
+                                        </div>
+                                        <div class="separator">-</div>
+                                        <div class="field">
+                                            <span>Max</span>
+                                            <input type="number" style="font-size: small;" class="input-max"
+                                                value="75000">
+                                        </div>
                                     </div>
                                     <div class="slider">
-                                      <div class="progress"></div>
+                                        <div class="progress"></div>
                                     </div>
                                     <div class="range-input">
-                                      <input type="range" class="range-min" min="0" max="100000" value="5000" step="500">
-                                      <input type="range" class="range-max" min="0" max="100000" value="75000" step="500">
+                                        <input type="range" class="range-min" min="0" max="100000" value="5000"
+                                            step="500">
+                                        <input type="range" class="range-max" min="0" max="100000" value="75000"
+                                            step="500">
                                     </div>
-      
+
                                 </div>
                             </div>
 
-                           
-                                
-                    
+
+
+
                             <div class="product-widget mb-30">
                                 <h5 class="pt-title">Choose Color</h5>
                                 <div class="product__color mt-20">
                                     <ul>
-                                        <input type="text" id="sub_category_url" hidden name="sub_category_url" value="" >
-                                        <input type="text" id="sub_category_" hidden name="sub_category_" value="{{subcategory_}}" >
+                                        <input type="text" id="sub_category_url" hidden name="sub_category_url"
+                                            value="">
+                                        <input type="text" id="sub_category_" hidden name="sub_category_"
+                                            value="{{subcategory_}}">
                                         {% for i in unique_colors %}
-                                    <div class="single-widget-category">
-                                        <input type="checkbox" id="color_{{i.id}}" value="{{i.id}}" name="color" >
-                                        <label for="color_{{i.id}}">{{i.code}} <span>(12)</span></label>
-                                    </div>
-                                    {% endfor %}
+                                        <div class="single-widget-category">
+                                            <input type="checkbox" id="color_{{i.id}}" value="{{i.id}}" name="color">
+                                            <label for="color_{{i.id}}">{{i.code}} <span>(12)</span></label>
+                                        </div>
+                                        {% endfor %}
                                         <!-- Add similar lines for other colors -->
                                     </ul>
                                 </div>
                             </div>
-                    
+
                             <div class="product-widget mb-30">
                                 <h5 class="pt-title">Choose Size</h5>
                                 <div class="widget-category-list mt-20">
@@ -517,29 +348,31 @@ input[type="range"]::-moz-range-thumb {
                                     <!-- Add similar lines for other sizes -->
                                 </div>
                             </div>
-                    
+
                             <div class="product-widget mb-30">
                                 <h5 class="pt-title">Choose Brand</h5>
                                 <div class="widget-category-list mt-20">
-                                    
+
                                     {% for bra in unique_brands %}
                                     <div class="single-widget-category">
-                                        <input type="checkbox" id="brand_{{ bra.id }}" name="brands" value="{{ bra.id }}">
-                                        <label for="brand_{{ bra.id }}">{{ bra.Brand_name }} <span>({{ bra.products.count }})</span></label>
+                                        <input type="checkbox" id="brand_{{ bra.id }}" name="brands"
+                                            value="{{ bra.id }}">
+                                        <label for="brand_{{ bra.id }}">{{ bra.Brand_name }} <span>({{
+                                                bra.products.count }})</span></label>
                                     </div>
                                     {% endfor %}
                                 </div>
                             </div>
-                    
-                            <button type="submit" id="filterBtn" class="tp-btn-square-lg"  >Filter</button>
+
+                            <button type="submit" id="filterBtn" class="tp-btn-square-lg">Filter</button>
                         </form>
-                    
-                        
+
+
                     </div>
-                    
-                    
-                   
-                    
+
+
+
+
                     <div class="col-xl-9 col-lg-8">
                         <div class="shop-banner mb-30">
                             <div class="banner-image">
@@ -607,8 +440,85 @@ input[type="range"]::-moz-range-thumb {
                                 aria-labelledby="FourCol-tab">
                                 <div class="tp-wrapper">
                                     <div class="row g-0" id="filteredProducts">
-                                        
-                                        {% include "ajax/product.html" %}
+
+                                        {% load product_tags %}
+
+                                        {% for variant in variants %}
+<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+    <div class="product__item product__item-d"
+        style="width: auto;height: 100%;display: flex;flex-direction: column;justify-content: space-between;">
+        <div class="product__thumb fix">
+            <div class="product-image w-img">
+                <a href="{{ variant.product.get_absolute_url }}">
+                    <img src="/media/{{ variant.image_id }}" alt="product">
+                </a>
+            </div>
+            <div class="product-action">
+                <!-- Add your product action buttons here -->
+            </div>
+        </div>
+        <div class="product__content-3">
+            <h6>
+                <a href="{% url 'product_detail' slug=variant.product.slug variant_id=variant.id %}">
+                    {{ variant.title }}
+                </a>
+                
+            </h6>
+            <div class="rating mb-5">
+                <!-- Add your product rating logic here -->
+            </div>
+            <div>
+                <del><span>&#8377</span>{{ variant.price|floatformat:0 }}</del>
+            </div>
+            <div class="price mb-10">
+                <span> <span>&#8377</span>
+                    {% calculate_pricetag variant.price variant.product.Discount %}
+                </span>
+            </div>
+        </div>
+        <div class="product__add-cart-s text-center">
+            <button type="button" class="wc-checkout d-flex align-items-center justify-content-center w-100"
+                data-bs-toggle="modal" data-bs-target="#productModalId-{{ forloop.counter }}">
+                Quick View
+            </button>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+
+                                        <!-- {% if product.variants.all %}
+                                                            <button type="button" class="variant-btn wc-checkout d-flex align-items-center justify-content-center w-100" data-bs-toggle="modal" data-bs-target="#variantModal-{{ forloop.counter }}">
+                                                                View Variants
+                                                            </button>
+                                                        {% endif %}
+                                                    
+                                                        </div>
+                                                        <!-- Variant Modal --
+                                            <div class="modal fade" id="variantModal-{{ forloop.counter }}" tabindex="-1" aria-labelledby="variantModalLabel-{{ forloop.counter }}" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="variantModalLabel-{{ forloop.counter }}">Variants for {{ product.name }}</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- Display variant details here --
+                                                            {% for variant in product.variants.all %}
+                                                                <p>
+                                                                    Variant: {{ variant.title }} - 
+                                                                    Price: {{ variant.price }} - 
+                                                                    Image: <img src="{{ variant.image.url }}" alt="{{ variant.title }}" height="50">
+                                                                    <!-- Add a link to view the selected variant --
+                                                                    <a href="{% url 'product_detail' product.slug %}?variant={{ variant.id }}" >View Variant</a>
+                                                                </p>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+
                                     </div>
                                 </div>
                             </div>
@@ -1723,58 +1633,84 @@ input[type="range"]::-moz-range-thumb {
     <script src="{% static 'assets/js/main.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-    
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-<script>
-   
-    const rangeInput = document.querySelectorAll(".range-input input")
-    var min_price = document.getElementById('min_price') 
-    var max_price = document.getElementById('max_price') 
-  priceInput = document.querySelectorAll(".price-input input"),
-  range = document.querySelector(".slider .progress");
-let priceGap = 1000;
-
-priceInput.forEach((input) => {
-  input.addEventListener("input", (e) => {
-    let minPrice = parseInt(priceInput[0].value),
-      maxPrice = parseInt(priceInput[1].value);
-
-    if (maxPrice - minPrice >= priceGap && maxPrice <= rangeInput[1].max) {
-      if (e.target.className === "input-min") {
-        rangeInput[0].value = minPrice;
-        range.style.left = (minPrice / rangeInput[0].max) * 100 + "%";
-      } else {
-        rangeInput[1].value = maxPrice;
-        range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
-      }
-    }
-  });
-});
-
-rangeInput.forEach((input) => {
-  input.addEventListener("input", (e) => {
-    let minVal = parseInt(rangeInput[0].value),
-      maxVal = parseInt(rangeInput[1].value);
-
-    if (maxVal - minVal < priceGap) {
-      if (e.target.className === "range-min") {
-        rangeInput[0].value = maxVal - priceGap;
-      } else {
-        rangeInput[1].value = minVal + priceGap;
-      }
-    } else {
-      priceInput[0].value = minVal;
-      priceInput[1].value = maxVal;
-      range.style.left = (minVal / rangeInput[0].max) * 100 + "%";
-      range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
-    }
-    min_price.value=minVal
-    max_price.value=maxVal
-  });
-});
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
+    <script>
+        // JavaScript to handle variant selection in the modal
+        $(document).ready(function () {
+            $('.variant-link').on('click', function (e) {
+                e.preventDefault();
+                var variantId = $(this).data('variant-id');
+                var productSlug = '{{ product.name }}';
+                console.log(productSlug);
+                if (!productSlug) {
+                    // If product slug is not available, try to fetch it from the URL
+                    var pathname = window.location.pathname;
+                    var parts = pathname.split('/');
+                    // Find the first part that looks like a slug
+                    for (var i = parts.length - 1; i >= 0; i--) {
+                        if (parts[i].length > 0 && !isNaN(parts[i])) {
+                            // If the part is not a number, use it as the slug
+                            productSlug = parts[i];
+                            break;
+                        }
+                    }
+                }
+                var url = '/product_detail/' + productSlug + '/?variant=' + variantId;
+                window.location.href = url;
+            });
+        });
+    </script>
+
+    <script>
+
+        const rangeInput = document.querySelectorAll(".range-input input")
+        var min_price = document.getElementById('min_price')
+        var max_price = document.getElementById('max_price')
+        priceInput = document.querySelectorAll(".price-input input"),
+            range = document.querySelector(".slider .progress");
+        let priceGap = 1000;
+
+        priceInput.forEach((input) => {
+            input.addEventListener("input", (e) => {
+                let minPrice = parseInt(priceInput[0].value),
+                    maxPrice = parseInt(priceInput[1].value);
+
+                if (maxPrice - minPrice >= priceGap && maxPrice <= rangeInput[1].max) {
+                    if (e.target.className === "input-min") {
+                        rangeInput[0].value = minPrice;
+                        range.style.left = (minPrice / rangeInput[0].max) * 100 + "%";
+                    } else {
+                        rangeInput[1].value = maxPrice;
+                        range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+                    }
+                }
+            });
+        });
+
+        rangeInput.forEach((input) => {
+            input.addEventListener("input", (e) => {
+                let minVal = parseInt(rangeInput[0].value),
+                    maxVal = parseInt(rangeInput[1].value);
+
+                if (maxVal - minVal < priceGap) {
+                    if (e.target.className === "range-min") {
+                        rangeInput[0].value = maxVal - priceGap;
+                    } else {
+                        rangeInput[1].value = minVal + priceGap;
+                    }
+                } else {
+                    priceInput[0].value = minVal;
+                    priceInput[1].value = maxVal;
+                    range.style.left = (minVal / rangeInput[0].max) * 100 + "%";
+                    range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
+                }
+                min_price.value = minVal
+                max_price.value = maxVal
+            });
+        });
 
 
 
@@ -1783,48 +1719,50 @@ rangeInput.forEach((input) => {
 
 
 
-    // _______________________
-
-    
-
-    function getParameterByName(name, url) {
-        if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, "\\$&");
-        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
-    }
-
-    // Wait for the page to fully load
-    window.onload = function () {
-        // Get the subcategory ID from the URL
-        var subcategoryId = getParameterByName('sub_category');
-
-        // Now you can use the subcategoryId in your code
-        document.getElementById('sub_category_url').value = subcategoryId
-    };
 
 
-    function addFilterToUrl() {
-    var currentUrl = window.location.href;
-    var filterParams = '&color=red&brand=Apple'; // Adjust filter values accordingly
-    var newUrl;
+        // _______________________
 
-    if (currentUrl.includes('?')) {
-        // If the URL already has a query string
-        newUrl = currentUrl + filterParams;
-    } else {
-        // If the URL doesn't have a query string
-        newUrl = currentUrl + '?query_pass=mob' + filterParams;
-    }
 
-    // Update the href attribute of your link
-    document.getElementById('filterLink').href = newUrl;
-    console.log(newUrl)
-}
-</script>
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        // Wait for the page to fully load
+        window.onload = function () {
+            // Get the subcategory ID from the URL
+            var subcategoryId = getParameterByName('sub_category');
+
+            // Now you can use the subcategoryId in your code
+            document.getElementById('sub_category_url').value = subcategoryId
+        };
+
+
+        function addFilterToUrl() {
+            var currentUrl = window.location.href;
+            var filterParams = '&color=red&brand=Apple'; // Adjust filter values accordingly
+            var newUrl;
+
+            if (currentUrl.includes('?')) {
+                // If the URL already has a query string
+                newUrl = currentUrl + filterParams;
+            } else {
+                // If the URL doesn't have a query string
+                newUrl = currentUrl + '?query_pass=mob' + filterParams;
+            }
+
+            // Update the href attribute of your link
+            document.getElementById('filterLink').href = newUrl;
+            console.log(newUrl)
+        }
+    </script>
 
 </body>
 

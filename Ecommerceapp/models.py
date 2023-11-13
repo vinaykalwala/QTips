@@ -5,12 +5,16 @@ from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django.db.models.signals import pre_save
 import uuid
+import hashlib
+from django.utils.crypto import get_random_string
+from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-
-
-
-
+from autoslug import AutoSlugField
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+from django.contrib.contenttypes.fields import GenericRelation
+from taggit.managers import TaggableManager
 
 
 class Main_categorie(models.Model):
@@ -55,21 +59,6 @@ class Tag(models.Model):
         return self.name
     
 
-# class Color (models.Model):
-# name = models.CharField(max_length=20)
-# code = models.CharField(max_length=10, blank=True, null=True)
-# def _str__(self):
-# return self.name
-# def color_tag(self):
-# if self.code is not None:
-# else:
-# return mark_safe('<p style="background-color: {}">Color </p>'.format(self.code))
-# return ""
-# class Size (models.Model):
-# name = models.CharField(max_length=20)
-# code = models.CharField(max_length=10, blank=True, null=True)
-# def _str__(self):
-# return self.name
 
 
 class Color(models.Model):
@@ -83,7 +72,7 @@ class Color(models.Model):
         else:
             return ""
     
-    def _str__(self):
+    def __str__(self):
         return self.name
     
 class Size(models.Model):
@@ -177,7 +166,16 @@ class Product(models.Model):
     slug = models.SlugField(default='', max_length=500, null=True, blank=True)
     name = models.CharField(null=True, max_length=120)
     # image = models.ImageField(null=True, upload_to='Product_images')
-    image = models.ImageField(blank=True,null=True,upload_to='Product_images')
+    def get_upload_path(instance, filename):
+        # Generate a folder name based on the product name
+        folder_name = slugify(instance.name)[:30]
+
+        # Define the upload path using the folder_name
+        upload_path = f"Product_images/{folder_name}"
+
+        # Return the final upload path
+        return f"{upload_path}/{filename}"
+    image = models.ImageField(blank=True,null=True,upload_to=get_upload_path)
     total_quantity = models.IntegerField(null=True)
     Availability = models.IntegerField(null=True)
     price = models.FloatField(null=True)
@@ -189,11 +187,11 @@ class Product(models.Model):
     Category = models.ForeignKey('Categorie', null=True, on_delete=models.CASCADE)
     Sub_category = models.ForeignKey('Sub_categorie', on_delete=models.CASCADE, null=True, blank=True)
     Tags = models.ForeignKey('Tag', null=True, blank=True, on_delete=models.CASCADE)
-    color = models.ForeignKey('Color', null=True, blank=True, on_delete=models.SET_NULL)
-    size = models.ForeignKey('Size', null=True, blank=True, on_delete=models.SET_NULL)
     Description = RichTextField(null=True)
     Section = models.ForeignKey('Section', null=True, on_delete=models.DO_NOTHING)
     brand = models.ForeignKey('Brands', on_delete=models.CASCADE, null=True, blank=True)
+
+    
 
     def variants(self):
         # Return the variants related to this product
@@ -218,15 +216,13 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
     def generate_custom_id(self):
-        # Your existing custom ID generation logic
-        # For example, combining time and random characters
         from django.utils.crypto import get_random_string
         current_time = timezone.now()
         timestamp_milliseconds = int(current_time.timestamp() * 1000)
         
         # Modify this part according to your needs
         sliced_name = self.name.split()[0]
-        return f"ESP{slugify(sliced_name)}PTD{timestamp_milliseconds}_{get_random_string(5)}"
+        return f"qtip{slugify(sliced_name)}pd{timestamp_milliseconds}_{get_random_string(5)}"
     def get_absolute_url(self):
         return reverse("product_detail", kwargs={'slug': self.slug})
 
@@ -239,24 +235,149 @@ class Product(models.Model):
         db_table = "app_Product"
 
 
-# def create_slug(instance, new_slug=None):
-#     slug = slugify(instance.name)
-#     if new_slug is not None:
-#         slug = new_slug
-#     qs = Product.objects.filter(slug=slug).order_by('-id')
-#     exists = qs.exists()
-#     if exists:
-#         new_slug = "%s-%s" % (slug, qs.first().id)
-#         return create_slug(instance, new_slug=new_slug)
-#     return slug
-
-# def pre_save_post_receiver(sender, instance, *args, **kwargs):
-#     if not instance.slug:
-#         instance.slug = create_slug(instance)
-
-# pre_save.connect(pre_save_post_receiver, Product)
-
     
+class Product_image(models.Model):
+    product = models.ForeignKey(Product,null=True,on_delete=models.CASCADE)
+    image = models.ImageField(null=True, upload_to='Product_images')
+
+    def __str__(self):
+        return f"{self.product.name} - Image {self.id}"
+
+# VARIANTS
+
+def get_variant_image_upload_path(instance, filename):
+    # Generate a folder structure based on the product name, color, and size
+    product_name_folder = slugify(instance.variant.product.name)[:30]  # Limit to 50 characters
+    variant_folder = f"{slugify(instance.variant.size)} - {slugify(instance.variant.color_name)}"
+
+    # Define the upload path using the folder structure
+    upload_path = f"Product_images/{product_name_folder}/{variant_folder}/Variant_images"
+
+    # Use a hash-based filename to ensure uniqueness and manage length
+    file_hash = hashlib.md5(filename.encode()).hexdigest()[:3]  # Limit to 8 characters
+    short_filename = f"{file_hash}.jpg"  # Adjust the file extension as needed
+
+    # Return the final upload path
+    return f"{upload_path}/{short_filename}"
+
+class Variant_image(models.Model):
+    variant = models.ForeignKey('Variants', on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, editable=False, blank=True, null=True)
+    def get_upload_path(instance, filename):
+        # Generate a folder structure based on the product name, color, and size
+        product_name_folder = slugify(instance.variant.product.name)[:30]
+        variant_folder = f"{instance.variant.size} - {instance.variant.color_name}"
+        
+        # Define the upload path using the folder structure
+        upload_path = f"Product_images/{product_name_folder}/{variant_folder}/Variant_imgs"
+        file_hash = hashlib.md5(filename.encode()).hexdigest()[:5]  # Limit to 8 characters
+        short_filename = f"{file_hash}.jpg"
+
+        # Return the final upload path with a separate folder for each variant
+        return f"{upload_path}/{filename}"
+    image = models.ImageField(null=True, upload_to=get_upload_path)
+
+    def __str__(self):
+        return f"{self.variant.title} - Image {self.id}"
+
+    def save(self, *args, **kwargs):
+        self.product = self.variant.product
+        super().save(*args, **kwargs)
+
+
+class Variants(models.Model):
+    slug = AutoSlugField(populate_from='title', unique=True, null=True, blank=True)
+    title = models.CharField(max_length=100, blank=True, null=True)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    color = models.ForeignKey('Color', on_delete=models.SET_NULL, blank=True, null=True)
+    size = models.ForeignKey('Size', on_delete=models.SET_NULL, blank=True, null=True)
+    def get_upload_path(instance, filename):
+        # Generate a folder structure based on the product name, color, and size
+        product_name_folder = slugify(instance.product.name)[:30]
+        variant_folder = f"{instance.size} - {instance.color_name}"
+        
+        # Define the upload path using the folder structure
+        upload_path = f"Product_images/{product_name_folder}/{variant_folder}"
+
+        # Return the final upload path with a separate folder for each variant
+        return f"{upload_path}/{filename}"
+
+    image_id = models.ImageField(
+        null=True,
+        blank=True,
+        upload_to=get_upload_path,  # Use a function for dynamic upload path
+    )
+    quantity = models.IntegerField(default=1)
+    price = models.FloatField(default=0)
+    # variant_images = models.ManyToManyField(Variant_image)
+
+    def __str__(self):
+        return self.title
+
+    def display_image(self):
+        return format_html('<img src="{}" width="50" height="50" />', self.image_id.url)
+
+    display_image.short_description = 'Image'
+
+    @property
+    def color_name(self):
+        return self.color.name if self.color else ''
+
+    @classmethod
+    def create_variant(cls, product, title, color, size, image_id, quantity, price):
+        new_variant = cls.objects.create(
+            title=title,
+            product=product,
+            color=color,
+            size=size,
+            image_id=image_id,
+            quantity=quantity,
+            price=price
+        )
+        new_variant.slug = new_variant.generate_custom_id()
+        new_variant.save()
+        return new_variant
+    id = models.CharField(max_length=50, primary_key=True, editable=False)
+
+    def save(self, *args, **kwargs):
+        # Generate custom ID if it doesn't exist
+        if not self.id:
+            timestamp_milliseconds = int(timezone.now().timestamp() * 1000)
+            self.id = f"{timestamp_milliseconds}_{get_random_string(5)}"
+        super().save(*args, **kwargs)
+
+    class Meta:
+        unique_together = ['slug', 'product']
+
+    def variants(self):
+        return Variants.objects.filter(product=self)
+
+    def get_absolute_url(self):
+        return reverse("product_detail", kwargs={'slug': self.slug})
+    
+    def related_variant_images(self):
+        return Variant_image.objects.filter(variant=self)
+
+    # def save(self, *args, **kwargs):
+    #     super().save(*args, **kwargs)
+    #     if self.color:
+    #         self.link_to_color_images()
+
+    # def link_to_color_images(self):
+    #     other_variants = Variants.objects.filter(product=self.product, color=self.color).exclude(id=self.id)
+    #     for variant in other_variants:
+    #         variant.variant_images.set(self.variant_images.all())
+
+@receiver(post_save, sender=Variant_image)
+def update_variant_images(sender, instance, **kwargs):
+    if instance.variant.color:
+        # Find other variants of the same product and color
+        other_variants = Variants.objects.filter(product=instance.variant.product, color=instance.variant.color).exclude(id=instance.variant.id)
+        
+        # Link the variant to the color's images
+        for variant in other_variants:
+            # Create variant images if they don't exist
+            Variant_image.objects.get_or_create(variant=variant, image=instance.image)
 
 
 class Additional_info(models.Model):
@@ -266,73 +387,6 @@ class Additional_info(models.Model):
 
     def __str__(self):
         return self.product.name
-    
-class Product_image(models.Model):
-    product = models.ForeignKey(Product,null=True,on_delete=models.CASCADE)
-    image = models.ImageField(null=True, upload_to='Product_images')
-
-    def __str__(self):
-        return f"{self.product.name} - Image {self.id}"
-    
-
-
-# VARIANTS
-class Variants(models.Model):
-    title = models.CharField(max_length=100, blank=True, null=True)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    color = models.ForeignKey(Color, on_delete=models.SET_NULL, blank=True, null=True)
-    size = models.ForeignKey(Size, on_delete=models.SET_NULL, blank=True, null=True)
-    image_id = models.IntegerField(blank=True, null=True, default=0)
-    quantity = models.IntegerField(default=1)
-    price = models.FloatField(default=0)
-
-    def __str__(self):
-        return self.title
-
-    def image(self):
-        img = Product_image.objects.get(id=self.image_id)
-        return img.image if img.id is not None else None
-
-    @property
-    def color_name(self):
-        return self.color.name if self.color else ''
-
-    def image_tag(self):
-        img = Product_image.objects.get(id=self.image_id)
-        if img.id is not None:
-            return mark_safe('<img src="{}" height="50"/>'.format(img.image.url))
-        else:
-            return ""
-        
-    @classmethod
-    def create_variant(cls, product, title, color, size, image_id, quantity, price):
-        # Create a new variant based on the given product
-        return cls.objects.create(
-            title=title,
-            product=product,
-            color=color,
-            size=size,
-            image_id=image_id,
-            quantity=quantity,
-            price=price
-        )
-
-
-class Cart(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    products = models.ManyToManyField(Product, through='CartItem')
-
-    def __str__(self):
-        return self.user.email
-    
-
-class CartItem(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
-
-    def __str__(self):
-        return self.cart.user.email +'->'+self.product.name
     
 
 
@@ -410,4 +464,3 @@ class OrderUpdate(models.Model):
 
     def __str__(self):
         return self.update_desc[0:7] + "..."
-
